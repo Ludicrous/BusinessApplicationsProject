@@ -62,15 +62,15 @@
         <Label x:Name="lblBands" Content="Bands" Grid.Column="4" HorizontalAlignment="Left" Margin="134.6,46,0,0" VerticalAlignment="Top" Height="37" Width="75" RenderTransformOrigin="0.717,-0.66"/>
         <Image  Source="{Binding SelectedBand.Picture,Converter={StaticResource ByteToImageConverter}}"  x:Name="imgBand" Grid.Column="4" HorizontalAlignment="Left" Height="188" Margin="44,22.2,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="266"/>
         <ListBox DisplayMemberPath="Name" SelectedItem="{Binding SelectedBand}" ItemsSource="{Binding Bands}" x:Name="lstBands" Grid.ColumnSpan="3" Grid.Column="6" HorizontalAlignment="Left" Height="432" Margin="0.2,31.2,0,0" Grid.Row="1" Grid.RowSpan="7" VerticalAlignment="Top" Width="213"/>
-        <Button   x:Name="btnAdd" Content="Toevoegen" Grid.Column="4" HorizontalAlignment="Left" Margin="48,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2" Command="{Binding AddBandCommand}"/>
-        <Button  IsEnabled="{Binding ButtonEnabled}" x:Name="btnDelete" Content="Verwijderen" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="70" Height="55" Margin="294,8,0,0" Grid.RowSpan="2"/>
+        <Button   x:Name="btnAdd" Content="Toevoegen" Grid.Column="4" HorizontalAlignment="Left" Margin="48,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2" IsEnabled="{Binding BandButton}" Command="{Binding AddBandCommand}"/>
+        <Button  IsEnabled="{Binding ButtonEnabled}" x:Name="btnDelete" Content="Verwijderen" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="70" Height="55" Margin="294,8,0,0" Grid.RowSpan="2" Command="{Binding RemoveCommand}"/>
         <Button IsEnabled="{Binding ButtonEnabled}" x:Name="btnSync" Content="Bewerken" Grid.Column="4" HorizontalAlignment="Left" Margin="211,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2" Command="{Binding BandBewerkenCommand}"/>
         <Label Style="{StaticResource IdLabels}" Content="Naam" Grid.Column="3" HorizontalAlignment="Left" Margin="9.8,30.8,0,0" Grid.Row="2" VerticalAlignment="Top" />
         <Label Style="{StaticResource IdLabels}" Content="Genres" HorizontalAlignment="Left" Margin="9.8,31.4,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="3" />
-        <Button Content="+" HorizontalAlignment="Left" Height="26" Margin="0.2,7,0,0" Grid.Row="5" VerticalAlignment="Top" Width="46" Grid.Column="2" Command="{Binding ToevoegenCommand}"/>
+        <Button Content="+" HorizontalAlignment="Left" Height="26" Margin="0.2,7,0,0" Grid.Row="5" VerticalAlignment="Top" Width="46" Grid.Column="2"  Command="{Binding ToevoegenCommand}"/>
         <Button Content="-" Grid.Column="3" HorizontalAlignment="Left" Height="26" Margin="12.8,7,0,0" Grid.Row="5" VerticalAlignment="Top" Width="46" Command="{Binding VerwijderenCommand}"/>
         <Button Content="Afbeelding Toevoegen" HorizontalAlignment="Left" Height="26" Margin="135,27.2,0,0" Grid.Row="4" VerticalAlignment="Top" Width="146" Grid.Column="4" Command="{Binding OpenImageCommand}"/>
-        <Button Content="Annuleer" HorizontalAlignment="Left" Height="26" Margin="123,26,0,0" Grid.Row="5" VerticalAlignment="Top" Width="69" Grid.Column="4" Command="{Binding AddNewBandCommand}"/>
-        <Button Content="+" HorizontalAlignment="Left" Height="26" Margin="0,26,0,0" Grid.Row="5" VerticalAlignment="Top" Width="43" Grid.Column="4" Command="{Binding AddNewBandCommand}"/>
+        <Button Content="Annuleer" HorizontalAlignment="Left" Height="26" Margin="123,26,0,0" Grid.Row="5" VerticalAlignment="Top" Width="69" Grid.Column="4" IsEnabled="{Binding BandButton}" Command="{Binding AnnuleerBandCommand}"/>
+        <Button Content="+" HorizontalAlignment="Left" Height="26" Margin="0,26,0,0" Grid.Row="5" VerticalAlignment="Top" Width="43" Grid.Column="4" IsEnabled="{Binding AddBandButton}" Command="{Binding AddNewBandCommand}"/>
     </Grid>
 </UserControl>

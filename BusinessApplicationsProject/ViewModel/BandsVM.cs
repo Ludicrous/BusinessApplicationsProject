@@ -32,6 +32,8 @@ namespace BusinessApplicationsProject.ViewModel
             Bands = Band.GetBands();
             Genres = Genre.GetGenres();
             ButtonEnabled = true;
+            AddBandButton = true;
+            BandButton = false;
         }
         private ObservableCollection<BandsToGenre> _bandsToGenre;
 
@@ -62,6 +64,38 @@ namespace BusinessApplicationsProject.ViewModel
             get { return _selectedBand; }
             set { _selectedBand = value; OnPropertyChanged("SelectedBand"); }
         }
+        private Genre _selectedGenre;
+
+        public Genre SelectedGenre
+        {
+            get { return _selectedGenre; }
+            set { _selectedGenre = value; OnPropertyChanged("SelectedGenre"); }
+        }
+        private Genre _selectedBandGenre;
+
+        public Genre SelectedBandGenre
+        {
+            get { return _selectedBandGenre; }
+            set { _selectedBandGenre = value; }
+        }
+        private bool _bandButton;
+
+        public bool BandButton
+        {
+            get { return _bandButton; }
+            set { _bandButton = value; OnPropertyChanged("BandButton"); }
+        }
+        private bool _addBandButton;
+
+        public bool AddBandButton
+        {
+            get { return _addBandButton; }
+            set { _addBandButton = value; OnPropertyChanged("AddBandButton"); }
+        }
+        
+        
+
+        
         public ICommand OpenImageCommand
         { get { return new RelayCommand(OpenImage, () => { return SelectedBand != null; }); } }
 
@@ -78,6 +112,16 @@ namespace BusinessApplicationsProject.ViewModel
                 OnPropertyChanged("SelectedBand");
             }
         }
+        public ICommand AnnuleerBandCommand
+        { get { return new RelayCommand(AnnuleerBand); } }
+
+        private void AnnuleerBand()
+        {
+            Bands.Remove(SelectedBand);
+            BandButton = false;
+            AddBandButton = true;
+            ButtonEnabled = true;
+        }
         public ICommand AddNewBandCommand
         {
             get { return new RelayCommand(AddNewBand); }
@@ -90,6 +134,22 @@ namespace BusinessApplicationsProject.ViewModel
             nieuw.Id = Band.ZoekId();
             SelectedBand = nieuw;
             Bands.Add(SelectedBand);
+            BandButton = true;
+            AddBandButton = false;
+            ButtonEnabled = false;
+            
+            
+        }
+        public ICommand RemoveCommand
+        {
+            get { return new RelayCommand(Remove, () => { return SelectedBand != null; }); }
+        
+        }
+
+        private void Remove()
+        {
+            Band.DeleteBand(SelectedBand);
+            Bands.Remove(SelectedBand);
         }
 
        
@@ -122,12 +182,26 @@ namespace BusinessApplicationsProject.ViewModel
         {
             byte[] NoIm=ZoekPic();
             Band.VoegBandToe(SelectedBand, NoIm);
-            //ListEnabled = true;
+            BandButton = false;
+            AddBandButton = true;
             ButtonEnabled = true;
-            //ContactAdd = false;
 
 
 
+        }
+        public ICommand ToevoegenCommand
+        { get { return new RelayCommand(Toevoegen, () => { return SelectedBand != null; }); } }
+
+        private void Toevoegen()
+        {
+            SelectedBand.Genres.Add(SelectedGenre);
+        }
+        public ICommand VerwijderenCommand
+        {  get { return new RelayCommand(Verwijderen, () => { return SelectedBandGenre != null; }); } }
+
+        private void Verwijderen()
+        {
+            SelectedBand.Genres.Remove(SelectedBandGenre);
         }
 
         private static byte[] ZoekPic()

@@ -110,7 +110,11 @@ namespace ProjectBussinessApplications.Models
 
         internal static void UpdateBand(Band SelectedBand)
         {
-            throw new NotImplementedException();
+            DbParameter Id = Database.AddParameter("Id", SelectedBand.Id);
+            DbParameter Name = Database.AddParameter("Name", SelectedBand.Name);
+            DbParameter Picture = Database.AddParameter("Picture", SelectedBand.Picture);
+            string sql = "Update Bands Set Name=@Name, Picture = @Picture where ID=@Id";
+            Database.ModifyData(sql,Id, Name, Picture);
         }
 
         internal static string ZoekId()
@@ -146,6 +150,13 @@ namespace ProjectBussinessApplications.Models
 
             return nieuw;
         }
+
+        internal static void DeleteBand(Band SelectedBand)
+        {
+            DbParameter Id = Database.AddParameter("Id", SelectedBand.Id);
+            string sql = "Delete from Bands where ID = @Id";
+            Database.ModifyData(sql, Id);
         }
+    }
     }
 
