@@ -1,0 +1,51 @@
+﻿<Window x:Class="BusinessApplicationsProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:BusinessApplicationsProject.ViewModel"
+        xmlns:v="clr-namespace:BusinessApplicationsProject.View"
+        WindowState="Maximized"
+        Title="MainWindow" Height="350" Width="525">
+        <!--xmlns:m="clr-namespace:BusinessApplicationsProject.Model"-->
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:MainPageVM}">
+            <v:MainPage></v:MainPage>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:BandsVM}">
+            <v:Bands></v:Bands>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ContactsVM}">
+            <v:Contacts></v:Contacts>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:GeneralSettingsVM}">
+            <v:GeneralSettings></v:GeneralSettings>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:LineUpVM}">
+            <v:LineUp></v:LineUp>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TicketsVM}">
+            <v:Tickets></v:Tickets>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="MijnMenuTemplate">
+            <WrapPanel></WrapPanel>
+        </ItemsPanelTemplate>
+    </Window.Resources>
+        <Window.DataContext>
+        <vm:ApplicationVM/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ItemsControl ItemsSource="{Binding Pages}" ItemsPanel="{StaticResource MijnMenuTemplate}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Name}" Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}" Margin="4" Width="100"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentPage}"/>
+
+    </Grid>
+</Window>

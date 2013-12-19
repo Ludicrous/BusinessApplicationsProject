@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="BusinessApplicationsProject.View.Contacts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1550">
+    <UserControl.Resources>
+
+
+
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource HoverBrush}" />
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Margin="0,0,-218,-12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="775*"/>
+            <ColumnDefinition Width="769*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Left" Height="375" VerticalAlignment="Top" Width="877" Margin="10,6,0,0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="97*"/>
+                <ColumnDefinition Width="36*"/>
+                <ColumnDefinition Width="32*"/>
+                <ColumnDefinition Width="35*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox DisplayMemberPath="Name" x:Name="lstContacten" HorizontalAlignment="Left" Height="270" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="368" Grid.Row="1" IsEnabled="{Binding ListEnabled}" ItemsSource="{Binding Contacten,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCont}"/>
+            <Label x:Name="lblBeheer" Content="Manage" HorizontalAlignment="Left" Margin="337,28,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="txtNaam" HorizontalAlignment="Left" Height="28" Margin="103,6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedCont.Name,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="295" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <ComboBox 
+                ItemsSource="{Binding Types}"  
+                SelectedItem="{Binding SelectedCont.JobRole}" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="Id" 
+                SelectedValue="{Binding SelectedCont.JobRole.Id}"
+                
+                x:Name="cboFunctie" HorizontalAlignment="Left" Margin="103.4,12,0,0" Grid.Row="2" VerticalAlignment="Top" Width="295" Height="28" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+            <TextBox x:Name="txtBedrijf" HorizontalAlignment="Left" Height="21" Margin="103.4,10.4,0,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding SelectedCont.Company,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="295" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <TextBox x:Name="txtTelefoon" HorizontalAlignment="Left" Height="21" Margin="103.4,9.8,0,0" Grid.Row="4" TextWrapping="Wrap" Text="{Binding SelectedCont.Phone,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="295" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <TextBox x:Name="txtEMail" HorizontalAlignment="Left" Height="20" Margin="103.4,12.2,0,0" Grid.Row="5" TextWrapping="Wrap" Text="{Binding SelectedCont.Email,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="295" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <Button  x:Name="btnAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="77.4,47.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="70" Height="55" Grid.Column="1" Command="{Binding AddContactCommand}" IsEnabled="{Binding ContactAdd}"/>
+            <Button  x:Name="btnRefresh" Content="Bewerken" HorizontalAlignment="Left" Margin="59.8,47.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="70" Height="55" Grid.Column="2" Command="{Binding UpdateContactCommand}" IsEnabled="{Binding ButtonEnabled}"/>
+            <Button  x:Name="btnDelete" Content="Verwijderen" HorizontalAlignment="Left" Margin="30.8,47.6,0,0" Grid.Row="6" VerticalAlignment="Top" Width="70" Height="55" Grid.Column="3" Command="{Binding DeleteContactCommand}" IsEnabled="{Binding ButtonEnabled}"/>
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Bedrijf" HorizontalAlignment="Left"  Margin="8,10,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="1" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Functie" HorizontalAlignment="Left" Margin="8,10,0,0" Grid.Row="2"  Grid.Column="1"/>
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Telefoon" HorizontalAlignment="Left" Margin="8,10,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.Column="1" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Naam" HorizontalAlignment="Left"  Margin="8,10,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="E-mail" HorizontalAlignment="Left"  Margin="8,10,0,0" Grid.Row="5" VerticalAlignment="Top" RenderTransformOrigin="0.909,0.571" Grid.Column="1" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Stad" HorizontalAlignment="Left"  Margin="10.4,9.8,0,0" Grid.Row="6" VerticalAlignment="Top" RenderTransformOrigin="0.909,0.571" Grid.Column="1" />
+            <TextBox x:Name="txtStad" HorizontalAlignment="Left" Height="20" Margin="103.4,9.8,0,0" Grid.Row="6" TextWrapping="Wrap" Text="{Binding SelectedCont.City,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalAlignment="Top" Width="295" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <Button Content="+" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10.4,65.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="49" Command="{Binding AddNewContactCommand}" IsEnabled="{Binding ButtonEnabled}"/>
+            <Button Content="Annuleer" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="1.8,68.8,0,0" Grid.Row="6" VerticalAlignment="Top" Width="53" Command="{Binding AnnuleerCommand}" IsEnabled="{Binding ContactAdd}"/>
+
+
+        </Grid>
+        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="376" VerticalAlignment="Top" Width="658" Margin="4.8,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="101*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="138*"/>
+                <RowDefinition Height="90*"/>
+                <RowDefinition Height="88*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="51*"/>
+                <ColumnDefinition Width="323*"/>
+                <ColumnDefinition Width="398*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Types}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedFunctie}" x:Name="lstFuncties" HorizontalAlignment="Left" Height="264" Margin="9.8,10.4,0,0" Grid.Row="1" Grid.RowSpan="4" VerticalAlignment="Top" Width="255" RenderTransformOrigin="0.045,0.466" Grid.Column="1" IsEnabled="{Binding FunctionListEnabled}"/>
+            <TextBox x:Name="txtNaamF" Grid.Column="2" HorizontalAlignment="Left" Height="27.394" Margin="10,14.949,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding SelectedFunctie.Name}" VerticalAlignment="Top" Width="288.72"/>
+            <Label x:Name="lblFuncties" Content="Functies" Grid.Column="1" HorizontalAlignment="Left" Margin="260,35,0,0" VerticalAlignment="Top" Height="47" Width="111" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnAddF"  Content="Toevoegen" Grid.Column="2" HorizontalAlignment="Left" Margin="82.6,38,0,0" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2" Command="{Binding AddFunctionCommand}" IsEnabled="{Binding FunctionAdd}" />
+            <Button x:Name="btnRefreshF"   Content="Bewerken" Grid.Column="2" HorizontalAlignment="Left" Margin="229,38,0,0" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="55" IsEnabled="{Binding FunctionButtonEnabled}" Command="{Binding UpdateFunctionCommand}" Grid.RowSpan="2"/>
+            <Button Content="+" Grid.Column="2" HorizontalAlignment="Left" Height="26" Margin="28.6,52,0,0" Grid.Row="3" VerticalAlignment="Top" Width="49" Command="{Binding AddNewFunctionCommand}" IsEnabled="{Binding FunctionButtonEnabled}" Grid.RowSpan="2"/>
+            <Button Content="Annuleer" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="157.6,55,0,0" Grid.Row="3" VerticalAlignment="Top" Width="53" Command="{Binding AnnuleerFCommand}" IsEnabled="{Binding FunctionAdd}" Grid.RowSpan="2"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="361" VerticalAlignment="Top" Width="1550" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0.2,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="231*"/>
+                <ColumnDefinition Width="222*"/>
+                <ColumnDefinition Width="362*"/>
+                <ColumnDefinition Width="362*"/>
+                <ColumnDefinition Width="127*"/>
+                <ColumnDefinition Width="236*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lblZoekenOp" Content="Zoeken op..." Grid.Column="1" HorizontalAlignment="Left" Margin="15,21,0,0" VerticalAlignment="Top" Height="47" Width="157"/>
+            <Button  x:Name="btnSearch"  Content="Zoek" Grid.Column="2" HorizontalAlignment="Left" Margin="251,17,0,0" VerticalAlignment="Top" Width="70" Height="55" Grid.Row="6" Command="{Binding SearchCommand}" />
+            <TextBox IsEnabled="{Binding CompanyChecked}" x:Name="txtBedrijfZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="2" Text="{Binding SearchCompany}"/>
+            <TextBox x:Name="txtNaamZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,66,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Text="{Binding SearchName}" IsEnabled="{Binding NameChecked}"/>
+            <TextBox IsEnabled="{Binding PhoneChecked}" x:Name="txtTelefoonZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,9.8,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="3" Text="{Binding SearchPhone}"/>
+            <TextBox IsEnabled="{Binding MailChecked}" x:Name="txtEmailZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,9.6,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="4" Text="{Binding SearchMail}" />
+            <ComboBox IsEnabled="{Binding FunctionChecked}" x:Name="cboFunctiesZoeken" Grid.Column="2" HorizontalAlignment="Left" Margin="201,12,0,0" VerticalAlignment="Top" Width="152" Height="19" Grid.Row="1"
+                ItemsSource="{Binding Types}"   
+                DisplayMemberPath="Name" 
+                SelectedValuePath="Id" 
+                SelectedValue="{Binding SelectedFunctionSearch}"/>
+            <ListBox ItemsSource="{Binding Gevonden}" DisplayMemberPath="Name" x:Name="lstGevonden" Grid.Column="3" HorizontalAlignment="Left" Height="274" Margin="23,66,0,0" VerticalAlignment="Top" Width="330" RenderTransformOrigin="0.03,0.765" Grid.RowSpan="7"/>
+            <TextBox x:Name="txtNaamZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,8,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+            <TextBox x:Name="txtFunctieZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="2"/>
+            <TextBox x:Name="txtBedrijfZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,7,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="3"/>
+            <TextBox x:Name="txtTelefoonZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="4"/>
+            <TextBox x:Name="txtEMalZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="5"/>
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Bedrijf" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4" Grid.Row="3" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Functie" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="2"/>
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Telefoon" HorizontalAlignment="Left" Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="4" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Naam" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="1" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="E-mail" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="5" />
+            <StackPanel HorizontalAlignment="Left" Height="100" Grid.RowSpan="2" VerticalAlignment="Top" Width="100"/>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="168" Margin="54,66,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="118">
+                <RadioButton Name="rdbName" GroupName="rdbZoek" Content="Naam" Margin="0,0,0.4,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding NameChecked}"/>
+                <RadioButton Name="rdbFunctie" GroupName="rdbZoek" Content="Functie" Margin="0,12,0.4,0" Height="18" Foreground="#FF22377F" IsChecked="{Binding FunctionChecked}" Command="{Binding CheckChanged}"/>
+                <RadioButton Name="rdbBedrijf" GroupName="rdbZoek" Content="Bedrijf" Margin="0,22,0.4,0" Height="18" Foreground="#FF22377F" IsChecked="{Binding CompanyChecked}" Command="{Binding CheckChanged}"/>
+                <RadioButton Name="rdbPhone" GroupName="rdbZoek" Content="Telefoon" Margin="0,22,0.4,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding PhoneChecked}" Command="{Binding CheckChanged}"/>
+                <RadioButton Name="rdbEmail" GroupName="rdbZoek" Content="E-Mail" Margin="0,16,0.4,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding MailChecked}" Command="{Binding CheckChanged}"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>
