@@ -260,13 +260,43 @@ namespace ProjectBussinessApplications.Models
 
 
 
-        internal static ObservableCollection<Contactperson> SearchContact(string p, string waarde)
+        internal static ObservableCollection<Contactperson> SearchFunction(string waarde)
         {
             DbParameter Value = Database.AddParameter("Value", "%" + waarde + "%");
-            DbParameter Column = Database.AddParameter("Column", p);
             ObservableCollection<Contactperson> lijst = new ObservableCollection<Contactperson>();
             string sql = "Select * From Contactpersons where ContactpersonType like @Value";
-            DbDataReader reader = Database.GetData(sql,Column, Value);
+            DbDataReader reader = Database.GetData(sql, Value);
+            while (reader.Read())
+            {
+                lijst.Add(VerwerkRij(reader));
+
+
+            }
+            return lijst;
+        }
+
+        internal static string ZoekId()
+        {
+
+            string id = null;
+            //Select IDENT_CURRENT('Festival.dbo.Contactpersons')
+            string sql = "Select IDENT_CURRENT ('Contactpersons') AS kolom";
+            DbDataReader reader = Database.GetData(sql);
+            while (reader.Read())
+            {
+                int i = Convert.ToInt32(reader["kolom"]);
+                id = (i + 1).ToString();
+
+            }
+            return id;
+        }
+
+        internal static ObservableCollection<Contactperson> SearchName( string SearchName)
+        {
+            DbParameter Value = Database.AddParameter("Value", "%" + SearchName + "%");
+            ObservableCollection<Contactperson> lijst = new ObservableCollection<Contactperson>();
+            string sql = "Select * From Contactpersons where Name like @Value";
+            DbDataReader reader = Database.GetData(sql, Value);
             while (reader.Read())
             {
                 lijst.Add(VerwerkRij(reader));

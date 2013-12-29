@@ -7,9 +7,6 @@
         Title="MainWindow" Height="350" Width="525">
         <!--xmlns:m="clr-namespace:BusinessApplicationsProject.Model"-->
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:MainPageVM}">
-            <v:MainPage></v:MainPage>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:BandsVM}">
             <v:Bands></v:Bands>
         </DataTemplate>
@@ -30,7 +27,7 @@
         </ItemsPanelTemplate>
     </Window.Resources>
         <Window.DataContext>
-        <vm:ApplicationVM/>
+        <vm:ApplicationVM></vm:ApplicationVM>
     </Window.DataContext>
 
     <Grid>
@@ -38,10 +35,10 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ItemsControl ItemsSource="{Binding Pages}" ItemsPanel="{StaticResource MijnMenuTemplate}">
+        <ItemsControl ItemsSource="{Binding Pages}" ItemsPanel="{StaticResource MijnMenuTemplate}" Margin="0,0,0.4,295.8" Grid.RowSpan="2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Name}" Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}" Margin="4" Width="100"/>
+                    <Button Content="{Binding Name}" Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}" Margin="4" Width="120" Height="55"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

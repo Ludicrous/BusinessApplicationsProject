@@ -107,51 +107,47 @@
         </Grid>
         <Grid HorizontalAlignment="Left" Height="361" VerticalAlignment="Top" Width="1550" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0.2,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="85*"/>
-                <RowDefinition Height="35*"/>
-                <RowDefinition Height="39*"/>
-                <RowDefinition Height="35*"/>
-                <RowDefinition Height="39*"/>
+                <RowDefinition Height="88*"/>
+                <RowDefinition Height="36*"/>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="36*"/>
                 <RowDefinition Height="38*"/>
-                <RowDefinition Height="90*"/>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="86*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="231*"/>
-                <ColumnDefinition Width="222*"/>
-                <ColumnDefinition Width="362*"/>
-                <ColumnDefinition Width="362*"/>
-                <ColumnDefinition Width="127*"/>
-                <ColumnDefinition Width="236*"/>
+                <ColumnDefinition Width="234*"/>
+                <ColumnDefinition Width="174*"/>
+                <ColumnDefinition Width="544*"/>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="333*"/>
+                <ColumnDefinition Width="149*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="lblZoekenOp" Content="Zoeken op..." Grid.Column="1" HorizontalAlignment="Left" Margin="15,21,0,0" VerticalAlignment="Top" Height="47" Width="157"/>
-            <Button  x:Name="btnSearch"  Content="Zoek" Grid.Column="2" HorizontalAlignment="Left" Margin="251,17,0,0" VerticalAlignment="Top" Width="70" Height="55" Grid.Row="6" Command="{Binding SearchCommand}" />
-            <TextBox IsEnabled="{Binding CompanyChecked}" x:Name="txtBedrijfZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="2" Text="{Binding SearchCompany}"/>
-            <TextBox x:Name="txtNaamZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,66,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Text="{Binding SearchName}" IsEnabled="{Binding NameChecked}"/>
-            <TextBox IsEnabled="{Binding PhoneChecked}" x:Name="txtTelefoonZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,9.8,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="3" Text="{Binding SearchPhone}"/>
-            <TextBox IsEnabled="{Binding MailChecked}" x:Name="txtEmailZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="201,9.6,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Grid.Row="4" Text="{Binding SearchMail}" />
-            <ComboBox IsEnabled="{Binding FunctionChecked}" x:Name="cboFunctiesZoeken" Grid.Column="2" HorizontalAlignment="Left" Margin="201,12,0,0" VerticalAlignment="Top" Width="152" Height="19" Grid.Row="1"
+            <Label x:Name="lblZoekenOp" Content="Zoeken op..." Grid.Column="1" HorizontalAlignment="Left" Margin="15.4,21,0,0" VerticalAlignment="Top" Height="47" Width="157"/>
+            <Button  x:Name="btnSearch"  Content="Zoek" Grid.Column="2" HorizontalAlignment="Left" Margin="92,24.2,0,0" VerticalAlignment="Top" Width="70" Height="55" Command="{Binding SearchCommand}" Grid.RowSpan="2" Grid.Row="4" />
+            <TextBox x:Name="txtNaamZoeken" Grid.Column="2" HorizontalAlignment="Left" Height="19" Margin="10,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="152" Text="{Binding SearchName}" IsEnabled="{Binding NameChecked}" Grid.Row="2"/>
+            <ComboBox IsEnabled="{Binding FunctionChecked}" x:Name="cboFunctiesZoeken" Grid.Column="2" HorizontalAlignment="Left" Margin="10,8.2,0,0" VerticalAlignment="Top" Width="152" Height="19"
                 ItemsSource="{Binding Types}"   
                 DisplayMemberPath="Name" 
                 SelectedValuePath="Id" 
-                SelectedValue="{Binding SelectedFunctionSearch}"/>
-            <ListBox ItemsSource="{Binding Gevonden}" DisplayMemberPath="Name" x:Name="lstGevonden" Grid.Column="3" HorizontalAlignment="Left" Height="274" Margin="23,66,0,0" VerticalAlignment="Top" Width="330" RenderTransformOrigin="0.03,0.765" Grid.RowSpan="7"/>
-            <TextBox x:Name="txtNaamZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,8,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-            <TextBox x:Name="txtFunctieZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="2"/>
-            <TextBox x:Name="txtBedrijfZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,7,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="3"/>
-            <TextBox x:Name="txtTelefoonZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="4"/>
-            <TextBox x:Name="txtEMalZ" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="52,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="5"/>
-            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Bedrijf" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4" Grid.Row="3" />
-            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Functie" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="2"/>
-            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Telefoon" HorizontalAlignment="Left" Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="4" />
-            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Naam" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="1" />
-            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="E-mail" HorizontalAlignment="Left"  Margin="54,7,0,0" VerticalAlignment="Top" Grid.Column="4"  Grid.Row="5" />
-            <StackPanel HorizontalAlignment="Left" Height="100" Grid.RowSpan="2" VerticalAlignment="Top" Width="100"/>
-            <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="168" Margin="54,66,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="118">
-                <RadioButton Name="rdbName" GroupName="rdbZoek" Content="Naam" Margin="0,0,0.4,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding NameChecked}"/>
-                <RadioButton Name="rdbFunctie" GroupName="rdbZoek" Content="Functie" Margin="0,12,0.4,0" Height="18" Foreground="#FF22377F" IsChecked="{Binding FunctionChecked}" Command="{Binding CheckChanged}"/>
-                <RadioButton Name="rdbBedrijf" GroupName="rdbZoek" Content="Bedrijf" Margin="0,22,0.4,0" Height="18" Foreground="#FF22377F" IsChecked="{Binding CompanyChecked}" Command="{Binding CheckChanged}"/>
-                <RadioButton Name="rdbPhone" GroupName="rdbZoek" Content="Telefoon" Margin="0,22,0.4,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding PhoneChecked}" Command="{Binding CheckChanged}"/>
-                <RadioButton Name="rdbEmail" GroupName="rdbZoek" Content="E-Mail" Margin="0,16,0.4,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding MailChecked}" Command="{Binding CheckChanged}"/>
+                SelectedValue="{Binding SelectedFunctionSearch}" Grid.Row="3"/>
+            <ListBox ItemsSource="{Binding Gevonden}" DisplayMemberPath="Name" x:Name="lstGevonden" Grid.Column="2" HorizontalAlignment="Left" Height="274" Margin="182,78,0,0" VerticalAlignment="Top" Width="330" RenderTransformOrigin="0.03,0.765" SelectedItem="{Binding SelectedSearch}" Grid.RowSpan="7"/>
+            <TextBox x:Name="txtNaamZ" Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="7.2,9,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="313" Text="{Binding SelectedSearch.Name}" Grid.Row="1"/>
+            <TextBox x:Name="txtFunctieZ" Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="7.2,9,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="313" Text="{Binding SelectedSearch.JobRole.Name}" Grid.Row="2"/>
+            <TextBox x:Name="txtBedrijfZ" Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="7.2,7.2,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="313" Text="{Binding SelectedSearch.Company}" Grid.Row="3"/>
+            <TextBox x:Name="txtTelefoonZ" Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="7.2,4.2,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="313" Text="{Binding SelectedSearch.Phone}" Grid.Row="4"/>
+            <TextBox x:Name="txtEMalZ" Grid.Column="4" HorizontalAlignment="Left" Height="23" Margin="7.2,8.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="313" Text="{Binding SelectedSearch.Email}" Grid.Row="5"/>
+
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Bedrijf" HorizontalAlignment="Left"  Margin="28,8.2,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="3"/>
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Functie" HorizontalAlignment="Left"  Margin="28,5,0,0" VerticalAlignment="Top" Grid.Column="3"  Grid.Row="2" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Telefoon" HorizontalAlignment="Left" Margin="28,4.2,0,0" VerticalAlignment="Top" Grid.Column="3" Grid.Row="4"/>
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Naam" HorizontalAlignment="Left"  Margin="28,5,0,0" VerticalAlignment="Top" Grid.Column="3"   Grid.Row="1" />
+            <Label Style="{StaticResource ResourceKey=IdLabels}" Content="E-mail" HorizontalAlignment="Left"  Margin="28,9.8,0,0" VerticalAlignment="Top" Grid.Column="3"  Grid.Row="5"  />
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="65" Margin="15.4,4,0,0" VerticalAlignment="Top" Width="118" Grid.RowSpan="2" Grid.Row="2">
+                <RadioButton x:Name="rdbName" GroupName="rdbZoek" Content="Naam" Margin="0,0,0.6,0" Height="18" Foreground="#FF22377F"  IsChecked="{Binding NameChecked}" Command="{Binding CheckChanged}"/>
+                <RadioButton x:Name="rdbFunctie" GroupName="rdbZoek" Content="Functie" Margin="0,23,0,0" Height="18" Foreground="#FF22377F" IsChecked="{Binding FunctionChecked}" Command="{Binding CheckChanged}" HorizontalAlignment="Left" Width="117"/>
+
             </StackPanel>
         </Grid>
 

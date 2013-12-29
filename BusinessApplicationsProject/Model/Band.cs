@@ -73,20 +73,7 @@ namespace ProjectBussinessApplications.Models
             return lijst;
 
         }
-      /*  private static Band VerwerkRij(IDataRecord reader)
-        {
-
-            Band nieuw = new Band();
-            nieuw.Id = reader["ID"].ToString();
-            nieuw.Name = reader["Name"].ToString();
-            nieuw.Picture = (byte[])reader["Picture"];
-            nieuw.Genres = BandsToGenre.GetData(nieuw.Id);
-
-
-
-            return nieuw;
-        }
-        */
+      
 
         internal static void VoegBandToe(Band SelectedBand, byte[] NoIM){
         
@@ -108,11 +95,17 @@ namespace ProjectBussinessApplications.Models
             Database.ModifyData(sql, Name, Image);
         }
 
-        internal static void UpdateBand(Band SelectedBand)
+        internal static void UpdateBand(Band SelectedBand, byte[] bytes)
         {
+            DbParameter Picture = null;
+            if (SelectedBand.Picture == null)
+            {
+                Picture = Database.AddParameter("Picture", bytes);
+            }
+            else { Picture = Database.AddParameter("Picture", SelectedBand.Picture); }
             DbParameter Id = Database.AddParameter("Id", SelectedBand.Id);
             DbParameter Name = Database.AddParameter("Name", SelectedBand.Name);
-            DbParameter Picture = Database.AddParameter("Picture", SelectedBand.Picture);
+            
             string sql = "Update Bands Set Name=@Name, Picture = @Picture where ID=@Id";
             Database.ModifyData(sql,Id, Name, Picture);
         }
@@ -133,10 +126,7 @@ namespace ProjectBussinessApplications.Models
 
         }
 
-        private static string GeefID(DbDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
+  
         private static Band VerwerkRij(IDataRecord reader)
         {
 
@@ -156,6 +146,31 @@ namespace ProjectBussinessApplications.Models
             DbParameter Id = Database.AddParameter("Id", SelectedBand.Id);
             string sql = "Delete from Bands where ID = @Id";
             Database.ModifyData(sql, Id);
+        }
+
+        internal static void RemoveGenres(Band SelectedBand)
+        {
+            DbParameter Id = Database.AddParameter("Id", SelectedBand.Id);
+            string sql = "Delete from BandsToGenre where BandID = @Id";
+            Database.ModifyData(sql, Id);
+        }
+
+        internal static void AddGenres(Band SelectedBand)
+        {
+            if (SelectedBand.Genres == null)
+            {
+
+            }
+            else
+            {
+                foreach (Genre BandGenre in SelectedBand.Genres)
+                {
+                    DbParameter BandId = Database.AddParameter("BId", SelectedBand.Id);
+                    DbParameter GenreId = Database.AddParameter("GId", BandGenre.Id);
+                    string sql = "Insert into BandsToGenre (BandID,GenreID) Values (@BId,@GId)";
+                    Database.ModifyData(sql, BandId, GenreId);
+                }
+            }
         }
     }
     }

@@ -26,18 +26,18 @@
             <Label x:Name="lblData" Content="Data" HorizontalAlignment="Left" Margin="289,0,0,0" VerticalAlignment="Top" Height="49" Width="108" Grid.Row="1"/>
             <Label x:Name="lblGenres" Content="Genres" HorizontalAlignment="Left" Margin="352.2,0,0,0" VerticalAlignment="Top" Height="49" Width="109" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"/>
             <Viewbox HorizontalAlignment="Left" Height="281" VerticalAlignment="Top" Width="485" Margin="121,0.2,0,0" Grid.Row="2" Grid.RowSpan="7">
-                <Calendar x:Name="Kalender" HorizontalAlignment="Left" VerticalAlignment="Top" Height="179.5" Width="217.6"/>
+                <Calendar SelectedDate="{Binding SelectedDate}" x:Name="Kalender" HorizontalAlignment="Left" VerticalAlignment="Top" Height="179.5" Width="217.6"/>
             </Viewbox>
-            <Button  x:Name="btnStartD" Content="Start Datum" HorizontalAlignment="Left" Margin="180,10.2,0,-2" Grid.Row="8" VerticalAlignment="Top" Width="70" Height="55"  />
-            <Button  x:Name="btnEindD" Content="Eind Datum" HorizontalAlignment="Left" Margin="373,10.2,0,-2" Grid.Row="8" VerticalAlignment="Top" Width="70" Height="55"/>
-            <ListBox x:Name="lstGenres" Grid.Column="2" HorizontalAlignment="Left" Height="241" Margin="130.2,27.2,0,0" Grid.Row="2" VerticalAlignment="Top" Width="237" Grid.RowSpan="7"/>
-            <TextBox x:Name="txtNaam1" Grid.Column="3" HorizontalAlignment="Left" Height="35" Margin="25.6,27.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="175" Grid.RowSpan="2"/>
-            <Button   x:Name="btnAddG" Content="Toevoegen" Grid.Column="3" HorizontalAlignment="Left" Margin="25.6,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
-            <Button x:Name="btnSyncG" Content="Bewerken" Grid.Column="3" HorizontalAlignment="Left" Margin="130.6,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
-            <TextBox Text="{Binding Dates.StartDate}" x:Name="txtStartD" HorizontalAlignment="Left" Height="22" Margin="484,13.2,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" />
-            <TextBox x:Name="txtEindD" HorizontalAlignment="Left" Height="21" Margin="484,14.6,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="153"/>
-            <Label Style="{StaticResource IdLabels}" x:Name="lblEindD" Content="EindDatum" HorizontalAlignment="Left" Height="35" Margin="484,10,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.RowSpan="2" Width="78" />
-            <Label x:Name="lblStartD" Style="{StaticResource IdLabels}" Content="Startdatum" HorizontalAlignment="Left" Height="35" Margin="484,9.2,0,0"  VerticalAlignment="Top"  Grid.Row="2" Grid.RowSpan="2" Width="79"/>
+            <ListBox IsEnabled="{Binding ListGEnabled}" SelectedItem="{Binding SelectedGenre}" ItemsSource="{Binding Genres}" DisplayMemberPath="Name" x:Name="lstGenres" Grid.Column="2" HorizontalAlignment="Left" Height="241" Margin="130.2,27.2,0,0" Grid.Row="2" VerticalAlignment="Top" Width="237" Grid.RowSpan="7"/>
+            <TextBox x:Name="txtNaam1" Grid.Column="3" HorizontalAlignment="Left" Height="35" Margin="25.6,27.2,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding SelectedGenre.Name}" VerticalAlignment="Top" Width="175" Grid.RowSpan="2"/>
+            <Button Command="{Binding AddCommand}" IsEnabled="{Binding AddEnabled}"  x:Name="btnAddG" Content="Toevoegen" Grid.Column="3" HorizontalAlignment="Left" Margin="25.6,38,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="3"/>
+            <Button IsEnabled="{Binding AddNewEnabled}" Content="+" HorizontalAlignment="Left" Height="26" Margin="25.6,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="43" Grid.Column="3"  Command="{Binding AddNewGenreCommand}"/>
+            <Button IsEnabled="{Binding UpdateEnabled}" Command="{Binding UpdateGenreCommand}" x:Name="btnSyncG" Content="Bewerken" Grid.Column="3" HorizontalAlignment="Left" Margin="130.6,38,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="3"/>
+            <Label x:Name="lblStartD" Style="{StaticResource IdLabels}" Content="Data" HorizontalAlignment="Left" Height="35" Margin="484,9.2,0,0"  VerticalAlignment="Top"  Grid.Row="2" Grid.RowSpan="2" Width="79"/>
+            <ListBox SelectedItem="{Binding SD}" ItemStringFormat="dd/MM/yyyy" DisplayMemberPath="Date" HorizontalAlignment="Left" Height="209" Margin="443,10.2,0,0" Grid.Row="3" Grid.RowSpan="5" VerticalAlignment="Top" Width="163" ItemsSource="{Binding Dates,UpdateSourceTrigger=PropertyChanged }" IsEnabled="{Binding ListEnabled}"/>
+            <Button Content="+" HorizontalAlignment="Left" Margin="214,18.2,0,0" Grid.Row="8" VerticalAlignment="Top" Width="87" Height="35" Command="{Binding AddDateCommand}"/>
+            <Button Content="-" HorizontalAlignment="Left" Margin="443,18.2,0,0" Grid.Row="8" VerticalAlignment="Top" Width="87" Height="35" Command="{Binding RemoveDateCommand}"/>
+            <Button IsEnabled="{Binding AddEnabled}" Content="Annuleer" HorizontalAlignment="Left" Height="26" Margin="86.6,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="59" Grid.Column="3"  Command="{Binding AnnuleerCommand}"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="371" VerticalAlignment="Top" Width="1543" Margin="0,440,0,0">
             <Grid.ColumnDefinitions>

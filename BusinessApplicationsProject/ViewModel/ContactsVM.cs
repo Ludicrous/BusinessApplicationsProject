@@ -191,6 +191,14 @@ namespace BusinessApplicationsProject.ViewModel
             get { return _gevonden; }
             set { _gevonden = value; OnPropertyChanged("Gevonden"); }
         }
+        private Contactperson _selectedSearch;
+
+        public Contactperson SelectedSearch
+        {
+            get { return _selectedSearch; }
+            set { _selectedSearch = value; OnPropertyChanged("SelectedSearch"); }
+        }
+
         #endregion
         #region Commands
         #region ICommands
@@ -203,6 +211,7 @@ namespace BusinessApplicationsProject.ViewModel
         {
             ContactpersonType nieuw = new ContactpersonType();
             nieuw.Name = "(leeg)";
+            nieuw.Id = ContactpersonType.ZoekId();
             Types.Add(nieuw);
             FunctionButtonEnabled = false;
             FunctionListEnabled = false;
@@ -272,38 +281,21 @@ namespace BusinessApplicationsProject.ViewModel
         {
             Contactperson nieuw = new Contactperson();
             nieuw.Name = "(leeg)";
-            nieuw.Id = ZoekId();
+            nieuw.Id = Contactperson.ZoekId();
             ContactpersonType nieuweT = new ContactpersonType();
             nieuweT.Id = "1";
             nieuweT.Name = "Onbekend";
             SelectedCont = nieuw;
             SelectedCont.JobRole = nieuweT;
-           
+
             Contacten.Add(SelectedCont);
             ListEnabled = false;
             ButtonEnabled = false;
             ContactAdd = true;
-            
 
-            
+
+
         }
-
-        private string ZoekId()
-        {
-            int Idnr = 1;
-            foreach (Contactperson Cperson in Contacten)
-            {
-                if (int.Parse(Cperson.Id) >= Idnr)
-                {
-                    Idnr = int.Parse(Cperson.Id);
-                }
-            }
-            return (Idnr + 1).ToString();
-        }
-            
-
-
-        
 
         public ICommand UpdateContactCommand
         {
@@ -337,38 +329,26 @@ namespace BusinessApplicationsProject.ViewModel
         {
             
 
-            if (CompanyChecked == false && NameChecked == false && PhoneChecked == false && FunctionChecked == false && MailChecked == false)
+            if (NameChecked == false && FunctionChecked == false)
             {
 
             }
             else
             {
-                SearchContact(CompanyChecked, NameChecked, PhoneChecked, FunctionChecked, MailChecked);
+                SearchContact(NameChecked, FunctionChecked);
             }
         }
-        internal void SearchContact(bool com, bool nam, bool phon, bool fun, bool mail)
+        internal void SearchContact( bool nam, bool fun)
         {
-            if (com == true)
+            if (nam == true)
             {
-                 Gevonden=Contactperson.SearchContact("Company",SearchCompany);
-               
-            }
-            else if (nam == true)
-            {
-                Gevonden = Contactperson.SearchContact("Name", SearchName);
-            }
-            else if (phon == true)
-            {
-                Gevonden = Contactperson.SearchContact("Phone", SearchPhone);
+                Gevonden = Contactperson.SearchName(SearchName);
             }
             else if (fun == true)
             {
-                Gevonden = Contactperson.SearchContact("ContactpersonType", SelectedFunctionSearch); 
+                Gevonden = Contactperson.SearchFunction(SelectedFunctionSearch); 
             }
-            else
-            {
-                Gevonden = Contactperson.SearchContact("Email", SearchMail);
-            }
+           
 
         }
 

@@ -55,5 +55,21 @@ namespace ProjectBussinessApplications.Models
             string sql = "Insert into ContactpersonType (Name) Values (@Name)";
             Database.ModifyData(sql, Name);
         }
+
+        internal static string ZoekId()
+        {
+
+            string id = null;
+            //Select IDENT_CURRENT('Festival.dbo.Contactpersons')
+            string sql = "Select IDENT_CURRENT ('ContactpersonType') AS kolom";
+            DbDataReader reader = Database.GetData(sql);
+            while (reader.Read())
+            {
+                int i = Convert.ToInt32(reader["kolom"]);
+                id = (i + 1).ToString();
+
+            }
+            return id;
+        }
     }
 }

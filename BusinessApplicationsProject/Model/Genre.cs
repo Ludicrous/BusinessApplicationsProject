@@ -50,5 +50,26 @@ namespace ProjectBussinessApplications.Models
 
             return nieuw;
         }
+
+
+
+        internal static void AddGenre(Genre SelectedGenre)
+        {
+            DbParameter Name = Database.AddParameter("Name", SelectedGenre.Name);
+            
+
+            string sql = "Insert into Genres (Name) values (@Name)";
+            Database.ModifyData(sql, Name);
+        }
+
+
+
+        internal static void UpdateGenre(Genre SelectedGenre)
+        {
+            DbParameter Name = Database.AddParameter("Name", SelectedGenre.Name);
+            DbParameter ID = Database.AddParameter("ID", SelectedGenre.Id);
+            string sql = "Update Genres SET Name = @Name where ID=@ID";
+            Database.ModifyData(sql, Name, ID);
+        }
     }
 }

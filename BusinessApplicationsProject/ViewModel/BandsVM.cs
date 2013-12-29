@@ -12,6 +12,7 @@ using System.ComponentModel.DataAnnotations;
 using BusinessApplicationsProject.Model;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows;
 
 
 namespace BusinessApplicationsProject.ViewModel
@@ -34,6 +35,7 @@ namespace BusinessApplicationsProject.ViewModel
             ButtonEnabled = true;
             AddBandButton = true;
             BandButton = false;
+            ListEnabled = true;
         }
         private ObservableCollection<BandsToGenre> _bandsToGenre;
 
@@ -92,7 +94,14 @@ namespace BusinessApplicationsProject.ViewModel
             get { return _addBandButton; }
             set { _addBandButton = value; OnPropertyChanged("AddBandButton"); }
         }
-        
+        private bool _listEnabled;
+
+        public bool ListEnabled
+        {
+            get { return _listEnabled; }
+            set { _listEnabled = value; OnPropertyChanged("ListEnabled"); }
+        }
+
         
 
         
@@ -121,6 +130,7 @@ namespace BusinessApplicationsProject.ViewModel
             BandButton = false;
             AddBandButton = true;
             ButtonEnabled = true;
+            ListEnabled = true;
         }
         public ICommand AddNewBandCommand
         {
@@ -132,11 +142,14 @@ namespace BusinessApplicationsProject.ViewModel
             Band nieuw = new Band();
             nieuw.Name="(leeg)";
             nieuw.Id = Band.ZoekId();
+            nieuw.Genres = new ObservableCollection<Genre>();
             SelectedBand = nieuw;
             Bands.Add(SelectedBand);
             BandButton = true;
             AddBandButton = false;
             ButtonEnabled = false;
+            ListEnabled = false;
+
             
             
         }
@@ -148,9 +161,14 @@ namespace BusinessApplicationsProject.ViewModel
 
         private void Remove()
         {
+            string n = SelectedBand.Name;
+            Band.RemoveGenres(SelectedBand);
             Band.DeleteBand(SelectedBand);
             Bands.Remove(SelectedBand);
+            MessageBox.Show("De band '"+ n + "' is succesvol verwijdert.");
         }
+
+        
 
        
         private bool _buttonEnabled;
@@ -167,7 +185,12 @@ namespace BusinessApplicationsProject.ViewModel
 
         private void BandBewerken()
         {
-            Band.UpdateBand(SelectedBand);
+            byte[] NoIm = ZoekPic();
+            string n = SelectedBand.Name;
+            Band.UpdateBand(SelectedBand, NoIm);
+            Band.RemoveGenres(SelectedBand);
+            Band.AddGenres(SelectedBand);
+            MessageBox.Show("De band "+ n+" is succesvol bijgewerkt.");
         }
         public ICommand AddBandCommand
         {
@@ -182,19 +205,50 @@ namespace BusinessApplicationsProject.ViewModel
         {
             byte[] NoIm=ZoekPic();
             Band.VoegBandToe(SelectedBand, NoIm);
+            Band.RemoveGenres(SelectedBand);
+            Band.AddGenres(SelectedBand);
             BandButton = false;
             AddBandButton = true;
             ButtonEnabled = true;
+            ListEnabled = true;
 
 
 
         }
         public ICommand ToevoegenCommand
-        { get { return new RelayCommand(Toevoegen, () => { return SelectedBand != null; }); } }
-
+        { get { return new RelayCommand(Toevoegen, () => (SelectedGenre != null && SelectedBand != null)); } }
+        
+    
         private void Toevoegen()
         {
-            SelectedBand.Genres.Add(SelectedGenre);
+
+
+            if (Check()) SelectedBand.Genres.Add(SelectedGenre);
+             
+            
+            
+        }
+
+        private bool Check()
+        {
+            if (SelectedBand.Genres == null)
+            {
+
+            }
+            else
+            {
+                foreach (Genre g in SelectedBand.Genres)
+                {
+                    if (SelectedGenre.Name == g.Name)
+                    {
+                        return false;
+
+                    }
+
+                }
+            }
+            
+            return true;
         }
         public ICommand VerwijderenCommand
         {  get { return new RelayCommand(Verwijderen, () => { return SelectedBandGenre != null; }); } }
@@ -202,11 +256,12 @@ namespace BusinessApplicationsProject.ViewModel
         private void Verwijderen()
         {
             SelectedBand.Genres.Remove(SelectedBandGenre);
+
         }
 
         private static byte[] ZoekPic()
         {
-            FileStream fs = File.OpenRead("E:\\MetTemplate\\BusinessApplicationsProject\\BusinessApplicationsProject\\bin\\Debug\\NoImage.jpg");
+            FileStream fs = File.OpenRead("NoImage.jpg");
             byte[] bytes = new byte[fs.Length];
             fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
             return bytes;

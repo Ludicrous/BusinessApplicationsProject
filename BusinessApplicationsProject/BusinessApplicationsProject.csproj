@@ -180,13 +180,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Images\ArcticMonkeysIM.jpg" />
-    <Resource Include="View\Images\Deadmau5Im.jpg" />
-    <Resource Include="View\Images\FooFightersIm.jpg" />
-    <Resource Include="View\Images\NoImage.jpg" />
-    <Resource Include="View\Images\SkrillexIM.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
