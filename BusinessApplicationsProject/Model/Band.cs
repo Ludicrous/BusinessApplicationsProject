@@ -66,7 +66,7 @@ namespace ProjectBussinessApplications.Models
             DbDataReader reader = Database.GetData(sql);
             while (reader.Read())
             {
-                //lijst.Add(VerwerkRij(reader));
+               
                 lijst.Add(VerwerkRij(reader));
 
             }

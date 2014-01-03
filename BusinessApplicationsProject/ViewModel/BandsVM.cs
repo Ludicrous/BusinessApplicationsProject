@@ -50,7 +50,7 @@ namespace BusinessApplicationsProject.ViewModel
         public ObservableCollection<Band> Bands
         {
             get { return _bands; }
-            set { _bands = value; OnPropertyChanged("Bands"); }
+            set { _bands = value; OnPropertyChanged("Bands"); OnPropertyChanged("SelectedBand"); }
         }
         private ObservableCollection<Genre> _genres;
 
@@ -78,7 +78,7 @@ namespace BusinessApplicationsProject.ViewModel
         public Genre SelectedBandGenre
         {
             get { return _selectedBandGenre; }
-            set { _selectedBandGenre = value; }
+            set { _selectedBandGenre = value; OnPropertyChanged("SelectedBandGenre"); }
         }
         private bool _bandButton;
 
@@ -102,8 +102,17 @@ namespace BusinessApplicationsProject.ViewModel
             set { _listEnabled = value; OnPropertyChanged("ListEnabled"); }
         }
 
-        
 
+
+        public ICommand RefreshCommand
+        {
+            get { return new RelayCommand(Refresh); }
+        }
+
+        private void Refresh()
+        {
+            Fill();
+        }
         
         public ICommand OpenImageCommand
         { get { return new RelayCommand(OpenImage, () => { return SelectedBand != null; }); } }
@@ -212,6 +221,7 @@ namespace BusinessApplicationsProject.ViewModel
             AddBandButton = true;
             ButtonEnabled = true;
             ListEnabled = true;
+            
 
 
 

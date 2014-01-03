@@ -14,7 +14,6 @@ namespace BusinessApplicationsProject.ViewModel
         public ApplicationVM()
         {
             _pages = new ObservableCollection<IPage>();
-            
             _pages.Add(new BandsVM());
             _pages.Add(new ContactsVM());
             _pages.Add(new GeneralSettingsVM());

@@ -272,6 +272,8 @@ namespace BusinessApplicationsProject.ViewModel
             AddNewEnabled = true;
             AddEnabled = true;
             UpdateEnabled = true;
+            OnPropertyChanged("Dates");
+            OnPropertyChanged("SelectedDate");
             
         }
         public ICommand RemoveDateCommand
