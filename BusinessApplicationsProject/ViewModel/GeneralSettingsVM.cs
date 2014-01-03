@@ -19,13 +19,44 @@ namespace BusinessApplicationsProject.ViewModel
         {
             Dates = Festival.GetDates();
             Genres = Genre.GetGenres();
+            Stages = Stage.GetStages();
             AddEnabled = false;
             AddNewEnabled = true;
             UpdateEnabled = true;
             ListGEnabled = true;
+            AddNewStageEnabled = true;
+            UpdateStageEnabled = true;
+            AddStageEnabled = false;
+            ListSEnabled = true;
             
             
         }
+        #region Properties
+        
+        private ObservableCollection<Stage> _stages;
+
+        public ObservableCollection<Stage> Stages
+        {
+            get { return _stages; }
+            set { _stages = value; OnPropertyChanged("Stages"); }
+        }
+        private Stage _selectedStage;
+
+        public Stage SelectedStage
+        {
+            get { return _selectedStage; }
+            set { _selectedStage = value; OnPropertyChanged("SelectedStage"); }
+        }
+        private bool _addNewStageEnabled;
+
+        public bool AddNewStageEnabled
+        {
+            get { return _addNewStageEnabled; }
+            set { _addNewStageEnabled = value; OnPropertyChanged("AddNewStageEnabled"); }
+        }
+        
+        
+        
         private bool _updateEnabled;
 
         public bool UpdateEnabled
@@ -95,6 +126,59 @@ namespace BusinessApplicationsProject.ViewModel
             get { return _genres; }
             set { _genres = value; OnPropertyChanged("Genres"); }
         }
+        private bool _updateStageEnabled;
+
+        public bool UpdateStageEnabled
+        {
+            get { return _updateStageEnabled; }
+            set { _updateStageEnabled = value; OnPropertyChanged("UpdateStageEnabled"); }
+        }
+        private bool _listSEnabled;
+
+        public bool ListSEnabled
+        {
+            get { return _listSEnabled; }
+            set { _listSEnabled = value; OnPropertyChanged("ListSEnabled"); }
+        }
+        private bool _addStageEnabled;
+
+        public bool AddStageEnabled
+        {
+            get { return _addStageEnabled; }
+            set { _addStageEnabled = value; OnPropertyChanged("AddStageEnabled"); }
+
+        }
+        
+        
+        
+        #endregion
+        public ICommand UpdateStageCommand
+        {
+            get { return new RelayCommand(UpdateStage, () => SelectedStage != null); }
+        }
+
+        private void UpdateStage()
+        {
+            Stage.UpdateGenre(SelectedStage);
+        }
+        public ICommand AddNewStageCommand
+        {
+            get { return new RelayCommand(AddNewStage); }
+ 
+        }
+
+        private void AddNewStage()
+        {
+            Stage nieuw = new Stage();
+            nieuw.Name = "(leeg)";
+            nieuw.Id = Stage.ZoekId();
+            SelectedStage = nieuw;
+            Stages.Add(SelectedStage);
+            AddNewStageEnabled = false;
+            AddStageEnabled = true;
+            UpdateStageEnabled = false;
+            ListSEnabled = false;
+        }
 
         public ICommand UpdateGenreCommand
         {
@@ -134,6 +218,30 @@ namespace BusinessApplicationsProject.ViewModel
             AddEnabled = false;
             UpdateEnabled = true;
             ListGEnabled = true;
+        }
+        public ICommand AnnuleerStageCommand
+        {
+            get { return new RelayCommand(AnnuleerStage); }
+        }
+
+        private void AnnuleerStage()
+        {
+            Stages.Remove(SelectedStage);
+            AddNewStageEnabled = true;
+            AddStageEnabled = false;
+            UpdateStageEnabled = true;
+            ListSEnabled = true;
+        }
+        public ICommand AddStageCommand
+        { get { return new RelayCommand(AddStage); } }
+
+        private void AddStage()
+        {
+            Stage.AddStage(SelectedStage);
+            ListSEnabled = true;
+            AddNewStageEnabled = true;
+            AddStageEnabled = false;
+            UpdateStageEnabled = false;
         }
         public ICommand AnnuleerCommand
         {

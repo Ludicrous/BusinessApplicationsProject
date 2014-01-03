@@ -5,6 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1550">
+    <UserControl.Resources>
+
+
+
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource HoverBrush}" />
+        </Style>
+
+    </UserControl.Resources>
     <Grid x:Name="LayoutRoot" Margin="0,0,0.4,0.4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="62*"/>
@@ -20,42 +45,32 @@
             <RowDefinition Height="54*"/>
             <RowDefinition Height="384*"/>
         </Grid.RowDefinitions>
-        <Label Content="Line up" HorizontalAlignment="Left" Margin="711,15.6,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="38" Width="90"/>
-        <ComboBox x:Name="cboDates" HorizontalAlignment="Left" Height="29" Margin="254,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="313"/>
-        <ComboBox x:Name="cboStages" HorizontalAlignment="Left" Height="22" Margin="254,10.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="313"/>
-        <ComboBox x:Name="cboBands" HorizontalAlignment="Left" Height="25" Margin="254,10.4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="313"/>
-        <StackPanel x:Name="StackBeginUur" Orientation="Horizontal" Margin="254,23.6,362.8,4" Grid.Row="5">
-            <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="0,5,0,5" Width="70" Text="0"  />
-            <Button x:Name="btnDown" x:FieldModifier="private" Margin="5,5,0,5"  Content="˅" Width="20"  />
-            <Button x:Name="btnUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20"  />
-        </StackPanel>
-        <StackPanel x:Name="StackBeginMin" Orientation="Horizontal" Margin="447,23.6,179.8,4" Grid.Row="5">
-            <TextBox x:Name="txtNum1" x:FieldModifier="private" Margin="0,5,0,5" Width="70" Text="0"  />
-            <Button x:Name="btnDown1" x:FieldModifier="private" Margin="5,5,0,5"  Content="˅" Width="20"  />
-            <Button x:Name="btnUp1" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20"  />
-        </StackPanel>
-        <StackPanel x:Name="StackEindUur" Orientation="Horizontal" Margin="254,16,362.8,0.4" Grid.Row="6">
-            <TextBox x:Name="txtNum2" x:FieldModifier="private" Margin="0,5,0,10.4" Width="70" Text="0"  />
-            <Button x:Name="btnDown2" x:FieldModifier="private" Margin="5,5,0,5"  Content="˅" Width="20" />
-            <Button x:Name="btnUp2" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" />
-        </StackPanel>
-        <StackPanel x:Name="StackEindMin" Orientation="Horizontal" Margin="447,16,79.8,0.4" Grid.Row="6">
-            <TextBox x:Name="txtNum3" x:FieldModifier="private" Margin="0,5,0,10.4" Width="70" Text="0"  />
-            <Button x:Name="btnDown3" x:FieldModifier="private" Margin="5,5,0,5"  Content="˅" Width="20" />
-            <Button x:Name="btnUp3" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20"/>
-        </StackPanel>
-        <Button   x:Name="btnAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="254,10.6,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55"/>
-        <Button  x:Name="btnDelete" Content="Verwijderen" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55" Margin="497,10.6,0,0"/>
-        <Button x:Name="btnSync" Content="Bewerken" HorizontalAlignment="Left" Margin="374,10.6,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55"/>
-        <ListBox x:Name="lstLineUpDagStage" Grid.Column="1" HorizontalAlignment="Left" Height="300" Margin="165.2,6.4,0,0" Grid.Row="2" Grid.RowSpan="6" VerticalAlignment="Top" Width="384"/>
-        <Grid x:Name="LineUpGrid" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="182" Grid.Row="7" VerticalAlignment="Top" Width="1550" Margin="0,96.6,0,0">
-            <Label Content="Hier komt de lineup " HorizontalAlignment="Left" Margin="439.9,136.1,0,0" VerticalAlignment="Top" Height="38.443" Width="698.91"/>
-        </Grid>
-        <Label x:Name="lblNaam" Style="{StaticResource IdLabels}" Content="Naam" HorizontalAlignment="Left"  Margin="177,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="22" Width="42" />
-        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Stage" HorizontalAlignment="Left"  Margin="177,10.2,0,0" Grid.Row="3" VerticalAlignment="Top" Height="22" Width="40" />
-        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Band" HorizontalAlignment="Left"  Margin="179,19.4,0,0" Grid.Row="4" VerticalAlignment="Top" Height="21" Width="37" />
-        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Starttijd" HorizontalAlignment="Left" Margin="161,23.6,0,0" Grid.Row="5" VerticalAlignment="Top" Height="21" Width="56" />
-        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Eindtijd" HorizontalAlignment="Left" Margin="177,31,0,0" Grid.Row="6" VerticalAlignment="Top" Height="22" Width="53"/>
+        <Label Content="Line up" HorizontalAlignment="Left" Margin="374,23.6,0,0" VerticalAlignment="Top" Grid.Row="1" Height="38" Width="90"/>
+        <ComboBox DisplayMemberPath="Name" ItemsSource="{Binding Stages,UpdateSourceTrigger=PropertyChanged }" SelectedItem="{Binding SelectedStage}"   x:Name="cboStages" HorizontalAlignment="Left" Height="22" Margin="254,10.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="313"/>
+        <ComboBox DisplayMemberPath="Name" ItemsSource="{Binding Bands,UpdateSourceTrigger=PropertyChanged }" SelectedItem="{Binding SelectedBand}"   x:Name="cboBands" HorizontalAlignment="Left" Height="25" Margin="254,10.4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="313"/>
+
+        <Button   x:Name="btnAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="236,9.6,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55"/>
+        <Button  x:Name="btnDelete" Content="Verwijderen" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55" Margin="463,9.6,0,0"/>
+        <Button x:Name="btnSync" Content="Bewerken" HorizontalAlignment="Left" Margin="339,9.6,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55"/>
+        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Stage" HorizontalAlignment="Left"  Margin="177,10.2,0,0" Grid.Row="3" VerticalAlignment="Top"  />
+        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Band" HorizontalAlignment="Left"  Margin="177,13.4,0,0" Grid.Row="4" VerticalAlignment="Top" />
+        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Starttijd" HorizontalAlignment="Left" Margin="176,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" />
+        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Eindtijd" HorizontalAlignment="Left" Margin="176,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Datum" HorizontalAlignment="Left" Margin="172,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" />
+        <ComboBox ItemStringFormat="dd/MM/yyyy" DisplayMemberPath="Date" ItemsSource="{Binding Dates,UpdateSourceTrigger=LostFocus}" SelectedItem="{Binding SelectedDate}"   x:Name="cboBands_Copy" HorizontalAlignment="Left" Height="25" Margin="254,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="313"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="263,11,0,0" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="409,11,0,0" Grid.Row="6" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="94"/>
+        <Button Content="+" HorizontalAlignment="Left"  Margin="358,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="14"/>
+        <Button Content="-" HorizontalAlignment="Left"  Margin="377,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="14"/>
+        <Button Content="+" HorizontalAlignment="Left"  Margin="509,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="14"/>
+        <Button Content="-" HorizontalAlignment="Left"  Margin="528,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="14"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="263,9.6,0,0" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="409,10.6,0,0" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="94"/>
+        <Button Content="+" HorizontalAlignment="Left"  Margin="358,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="14"/>
+        <Button Content="-" HorizontalAlignment="Left"  Margin="377,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="14"/>
+        <Button Content="+" HorizontalAlignment="Left"  Margin="509,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="14"/>
+        <Button Content="-" HorizontalAlignment="Left"  Margin="528,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="14"/>
+
 
     </Grid>
 </UserControl>

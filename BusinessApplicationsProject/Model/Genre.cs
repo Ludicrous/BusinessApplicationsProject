@@ -56,7 +56,6 @@ namespace ProjectBussinessApplications.Models
         internal static void AddGenre(Genre SelectedGenre)
         {
             DbParameter Name = Database.AddParameter("Name", SelectedGenre.Name);
-            
 
             string sql = "Insert into Genres (Name) values (@Name)";
             Database.ModifyData(sql, Name);

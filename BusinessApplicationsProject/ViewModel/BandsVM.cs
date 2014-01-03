@@ -166,6 +166,7 @@ namespace BusinessApplicationsProject.ViewModel
             Band.DeleteBand(SelectedBand);
             Bands.Remove(SelectedBand);
             MessageBox.Show("De band '"+ n + "' is succesvol verwijdert.");
+            Fill();
         }
 
         
