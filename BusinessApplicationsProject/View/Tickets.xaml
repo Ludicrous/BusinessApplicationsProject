@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="850" Width="2000">
+             mc:Ignorable="d" Height="850" Width="1550">
     <Grid x:Name="LayoutRoot" Margin="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="77*"/>
@@ -32,37 +32,40 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-        <Label x:Name="lblTickets" Content="Tickets" Grid.Column="4" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Height="37" Width="84"/>
-        <ListBox x:Name="lstSoorten" HorizontalAlignment="Left" Height="275.162" Margin="10,56.255,0,0" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Top" Width="237.315" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <TextBox x:Name="txtNaam" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="63.412,13.255,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="134.36" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtInfo" Grid.Column="4" HorizontalAlignment="Left" Height="152.815" Margin="69.363,42.035,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="134.36" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtBeschikbaar" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="63.412,10,0,0" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="134.36" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtPrijs" Grid.Column="3" HorizontalAlignment="Left" Height="20.283" Margin="65.482,12.317,0,0" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="134.36" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtTotaalBeschikbaar" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="65.082,6.532,0,0" Grid.Row="4" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="134.36" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="lstBeschikbaar" HorizontalAlignment="Left" Height="304.85" Margin="10,64.066,0,0" Grid.Row="6" Grid.RowSpan="6" VerticalAlignment="Top" Width="237.315" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <TextBox x:Name="txtTicketNaam" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="79.842,10.001,0,0" Grid.Row="7" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <StackPanel Orientation="Horizontal" Grid.Column="3" Margin="80,7,181,31" Grid.Row="8" Grid.ColumnSpan="2" Height="30">
-            <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="0,5,0,5" Width="70" Text="0" />
-            <Button x:Name="btnDown" x:FieldModifier="private" Margin="5,5,0,5"  Content="˅" Width="20" />
-            <Button x:Name="btnUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20"  />
-        </StackPanel>
-        <TextBox x:Name="txtKlantNaam" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="80.243,10,0,0" Grid.Row="9" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Button   x:Name="btnAddG" Content="Verstuur" Grid.Column="3" HorizontalAlignment="Left" Margin="10,3.284,0,0" Grid.Row="10" VerticalAlignment="Top" Width="70" Height="55"/>
-        <Button x:Name="btnSyncG" Content="Bewerk" Grid.Column="7" HorizontalAlignment="Left" Margin="171,0,0,0" Grid.Row="11" VerticalAlignment="Top" Width="70" Height="55" Grid.ColumnSpan="2"/>
-        <Button  x:Name="btnDeleteG" Content="Verwijder" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="10" VerticalAlignment="Top" Width="70" Height="55" Margin="84.845,3.284,0,0" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="lstKlantBestelling" Grid.ColumnSpan="2" Grid.Column="5" HorizontalAlignment="Left" Height="300.633" Margin="55.954,40.784,0,0" Grid.Row="6" Grid.RowSpan="5" VerticalAlignment="Top" Width="221.048"/>
-        <Button   x:Name="btnAdd" Content="Toevoegen" Grid.Column="5" HorizontalAlignment="Left" Margin="84,4,0,0" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="55"/>
-        <Button x:Name="btnSync" Content="Bewerken" Grid.Column="5" HorizontalAlignment="Left" Margin="84,5,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
+        <Label x:Name="lblTickets" Content="Tickets" Grid.Column="5" HorizontalAlignment="Left" Margin="100.6,19.6,0,0" VerticalAlignment="Top" Height="37" Width="84" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <ListBox IsEnabled="{Binding ListEnabled}" DisplayMemberPath="Name" ItemsSource="{Binding TicketTs}" SelectedItem="{Binding SelectedTicketType}" x:Name="lstSoorten" HorizontalAlignment="Left" Height="229" Margin="141.4,35.4,0,0" Grid.Row="2" Grid.RowSpan="4" VerticalAlignment="Top" Width="231" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <TextBox Text="{Binding SelectedTicketType.Name}" x:Name="txtNaam" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="49.6,33.4,0,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Width="135" Grid.ColumnSpan="2"/>
+        <TextBox IsEnabled="False" Foreground="Black" x:Name="txtBeschikbaar" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="49.6,29.4,0,0" Grid.Row="5" TextWrapping="Wrap" Text="{Binding SelectedTicketType.AvailableTickets}" VerticalAlignment="Top" Width="135" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtPrijs" Grid.Column="5" HorizontalAlignment="Left" Height="21" Margin="51.6,32,0,0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding SelectedTicketType.Price,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="135" Grid.ColumnSpan="2"/>
+        <TextBox  x:Name="txtTotaalBeschikbaar" Grid.Column="5" HorizontalAlignment="Left" Height="23" Margin="51.6,26.8,0,0" Grid.Row="4" TextWrapping="Wrap" Text="{Binding SelectedTicketType.Totaal}" VerticalAlignment="Top" Width="135" Grid.ColumnSpan="2"/>
+
+
+
+        <TextBox x:Name="txtKlantNaam" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="61.4,24.6,0,0" Grid.Row="8" TextWrapping="Wrap" Text="{Binding SelectedBesteld.Ticketholder}" VerticalAlignment="Top" Width="205" Grid.ColumnSpan="2"/>
+        <Button Command="{Binding SendOrderCommand}"  x:Name="btnAddG" Content="Verstuur" Grid.Column="2" Margin="10.4,56.2,74.8,0" Grid.Row="9" VerticalAlignment="Top" Height="55" Grid.RowSpan="2"/>
+        <Button x:Name="btnSyncG" Content="Print Ticket" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,10.6,0,0" Grid.Row="8" VerticalAlignment="Top" Width="70" Height="55"/>
+        <Button Command="{Binding DeleteOrderCommand}" x:Name="btnDeleteG" Content="Verwijder" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="9" VerticalAlignment="Top" Width="75" Height="55" Margin="69.2,56.2,0,0" Grid.RowSpan="2"/>
+        <ListBox DisplayMemberPath="Text" ItemsSource="{Binding Besteld}" SelectedItem="{Binding SelectedBesteld}" x:Name="lstKlantBestelling" Grid.ColumnSpan="2" Grid.Column="4" HorizontalAlignment="Left" Height="301" Margin="36.8,22.2,0,0" Grid.Row="6" Grid.RowSpan="5" VerticalAlignment="Top" Width="221"/>
+        <Button  IsEnabled ="{Binding AddTTEnabled}" Command="{Binding AddTTCommand}"  x:Name="btnAdd" Content="Toevoegen" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,30,0,0" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
+        <Button Command="{Binding UpdateTTCommand}" IsEnabled="{Binding UpdateEnabled}" x:Name="btnSync" Content="Bewerken" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,25.8,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
         <!--<Button  x:Name="btnDel" Content="" Grid.Column="5" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Margin="84.36,36.4,0,0" Grid.RowSpan="2"/>-->
-        <ListBox x:Name="lstBestellingen" Grid.Column="7" HorizontalAlignment="Left" Height="276" Margin="105,41,0,0" Grid.Row="6" Grid.RowSpan="5" VerticalAlignment="Top" Width="214" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnSyncG_Copy1" Content="Bewerken" Grid.Column="3" HorizontalAlignment="Left" Margin="127.772,3.284,0,0" Grid.Row="10" VerticalAlignment="Top" Width="70" Height="55" Grid.ColumnSpan="2"/>
-        <Label Style="{StaticResource IdLabels}" Content="Naam" Grid.Column="3" HorizontalAlignment="Left" Margin="0,14.974,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Style="{StaticResource IdLabels}" Content="Prijs" Grid.Column="3" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-        <Label Style="{StaticResource IdLabels}" Content="Totaal Aantal" Grid.Column="2" HorizontalAlignment="Left" Margin="135,10,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Label Style="{StaticResource IdLabels}" Content="Beschikbaar" Grid.Column="2" HorizontalAlignment="Left" Margin="144,12,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Label Style="{StaticResource IdLabels}" Content="Extra Info" Grid.Column="4" HorizontalAlignment="Left" Margin="106.843,8.907,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Style="{StaticResource IdLabels}" Content="Ticket" Grid.Column="3" HorizontalAlignment="Left" Margin="10,11.721,0,0" Grid.Row="7" VerticalAlignment="Top"/>
-        <Label Style="{StaticResource IdLabels}" Content="Aantal" Grid.Column="3" HorizontalAlignment="Left" Margin="10,9.999,0,0" Grid.Row="8" VerticalAlignment="Top"/>
-        <Label Style="{StaticResource IdLabels}" Content="Klant" Grid.Column="3" HorizontalAlignment="Left" Margin="10,11.72,0,0" Grid.Row="9" VerticalAlignment="Top"/>
+        <Button Command="{Binding UpdateOrderCommand}" x:Name="btnSyncG_Copy1" Content="Bewerken" Grid.Column="2" HorizontalAlignment="Left" Margin="109.4,56.2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="70" Height="55" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Naam" Grid.Column="4" HorizontalAlignment="Left" Margin="141.8,35.4,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Prijs" Grid.Column="4" HorizontalAlignment="Left" Margin="141.8,30,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Totaal Aantal" Grid.Column="4" HorizontalAlignment="Left" Margin="99.8,29.8,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Beschikbaar" Grid.Column="4" HorizontalAlignment="Left" Margin="99.8,30.4,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Ticket" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,4.8,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Aantal" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,52.8,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Klant" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,25.6,0,0" Grid.Row="8" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Button IsEnabled="{Binding AddNewTTEnabled}" Command="{Binding AddNewTTCommand}" Content="+" Grid.Column="6" HorizontalAlignment="Left" Height="20" Margin="44.4,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="40"/>
+        <Button IsEnabled ="{Binding AddTTEnabled}" Grid.ColumnSpan="2" Content="Annuleer" Grid.Column="6" HorizontalAlignment="Left" Height="20" Margin="102.4,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="92"/>
+        <ComboBox ItemsSource="{Binding TicketTs}" SelectedItem="{Binding SelectedBesteld.TicketType}" SelectedValuePath="Id" 
+                SelectedValue="{Binding SelectedBesteld.TicketType.Id}"
+                  DisplayMemberPath="Name" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="62.4,4.8,0,0" Grid.Row="7" VerticalAlignment="Top" Width="205"/>
+        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="61.4,52.8,0,0" Grid.Row="7" TextWrapping="Wrap" Text="{Binding SelectedBesteld.Amount}" VerticalAlignment="Top" Width="205" Grid.RowSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="E-mail" Grid.Column="1" HorizontalAlignment="Left"  Margin="142.8,10.2,0,0" Grid.Row="9" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="61.4,10.2,0,0" Grid.Row="9" TextWrapping="Wrap" Text="{Binding SelectedBesteld.TicketholderEmail}" VerticalAlignment="Top" Width="205"/>
+        <Button Command="{Binding AddNewOrderCommand}" Content="+" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="108.8,46.2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="37"/>
+        <Button Command="{Binding CancelOrderCommand}" Content="Annuleer" Grid.Column="1" HorizontalAlignment="Left" Margin="70.8,10,0,0" Grid.Row="10" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </UserControl>

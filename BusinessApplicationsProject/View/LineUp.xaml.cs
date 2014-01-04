@@ -24,5 +24,7 @@ namespace BusinessApplicationsProject.View
         {
             InitializeComponent();
         }
+
+       
     }
 }

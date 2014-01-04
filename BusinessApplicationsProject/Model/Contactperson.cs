@@ -220,7 +220,7 @@ namespace ProjectBussinessApplications.Models
 
         public string Error
         {
-            get { return null; }
+            get { return "Model not valid"; }
         }
 
         public string this[string columnName]
@@ -230,7 +230,10 @@ namespace ProjectBussinessApplications.Models
                 try
                 {
                     object value = this.GetType().GetProperty(columnName).GetValue(this);
-                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = columnName });
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null)
+                    {
+                        MemberName = columnName
+                    });
                 }
                 catch (ValidationException ex)
                 {

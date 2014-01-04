@@ -42,7 +42,7 @@ namespace BusinessApplicationsProject.ViewModel
         public ObservableCollection<BandsToGenre> ListBandsToGenre
         {
             get { return _bandsToGenre; }
-            set { _bandsToGenre = value; OnPropertyChanged("ListBandsToGenres"); }
+            set { _bandsToGenre = value; OnPropertyChanged("ListBandsToGenre"); }
         }
 
         private ObservableCollection<Band> _bands;

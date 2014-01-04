@@ -24,5 +24,10 @@ namespace BusinessApplicationsProject.View
         {
             InitializeComponent();
         }
+
+        private void txtTotaalBeschikbaar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

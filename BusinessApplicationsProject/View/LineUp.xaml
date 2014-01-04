@@ -56,7 +56,7 @@
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Starttijd" HorizontalAlignment="Left" Margin="176,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" />
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Eindtijd" HorizontalAlignment="Left" Margin="176,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Datum" HorizontalAlignment="Left" Margin="172,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" />
-        <ComboBox ItemStringFormat="dd/MM/yyyy" DisplayMemberPath="Date" ItemsSource="{Binding Dates,UpdateSourceTrigger=LostFocus}" SelectedItem="{Binding SelectedDate}"   x:Name="cboBands_Copy" HorizontalAlignment="Left" Height="25" Margin="254,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="313"/>
+        <ComboBox   ItemStringFormat="dd/MM/yyyy" DisplayMemberPath="Date" ItemsSource="{Binding Dates,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDate}"   x:Name="cboBands_Copy" HorizontalAlignment="Left" Height="25" Margin="254,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="313"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="254,10,0,0" Grid.Row="6" TextWrapping="Wrap" Text="{Binding Einduur}" VerticalAlignment="Top" Width="38"/>
         <TextBox  HorizontalAlignment="Left" Height="23" Margin="254,9.6,0,0" Grid.Row="5" TextWrapping="Wrap" Text="{Binding Startuur}" VerticalAlignment="Top" Width="38"/>
 
@@ -75,6 +75,9 @@
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Min" HorizontalAlignment="Left" Margin="368,10.6,0,0" Grid.Row="5" VerticalAlignment="Top"/>
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="U" HorizontalAlignment="Left" Margin="297,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Min" HorizontalAlignment="Left" Margin="368,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
+        <ListBox ItemsSource="{Binding Performances}" DisplayMemberPath="TotInfo"  HorizontalAlignment="Left" Height="408" Grid.RowSpan="6" VerticalAlignment="Top" Width="412" Margin="921,0.4,0,0" Grid.Row="2"/>
+        <Label   Content="{Binding SelectedDate.Date}" ContentStringFormat="{}{0:dd/MM/yyyy}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1040,34.6,0,0" Grid.Row="1" Grid.RowSpan="2"/>
+        <Button Command="{Binding ToonLineUpCommand}" Content="Toon Line Up" HorizontalAlignment="Left" Height="22" Margin="657,9.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="169" />
 
 
     </Grid>

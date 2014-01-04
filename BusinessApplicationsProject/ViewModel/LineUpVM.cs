@@ -29,8 +29,18 @@ namespace BusinessApplicationsProject.ViewModel
             Stages = Stage.GetStages();
             Bands = Band.GetBands();
             
+           
+            
+            
         }
+        private ObservableCollection<LineUp> _performances;
 
+        public ObservableCollection<LineUp> Performances
+        {
+            get { return _performances; }
+            set { _performances = value; OnPropertyChanged("Performances"); OnPropertyChanged("SelectedDate"); OnPropertyChanged("SelectedStage"); }
+        }
+        
         private void FillTime()
         {
             Startmin = 0;
@@ -39,6 +49,14 @@ namespace BusinessApplicationsProject.ViewModel
             Eindmin = 5;
             EndTime = StartTime.AddMinutes(5);
         }
+        private string _totInfo;
+
+        public string TotInfo
+        {
+            get { return _totInfo; }
+            set { _totInfo = value; }
+        }
+        
         private DateTime _startTime;
 
         public DateTime StartTime
@@ -111,7 +129,7 @@ namespace BusinessApplicationsProject.ViewModel
 
         public Festival SelectedDate
         {
-            get { return _selectedDate; }
+            get { return _selectedDate;  }
             set { _selectedDate = value; OnPropertyChanged("SelectedDate"); }
         }
         private Band _selectedBand;
@@ -317,6 +335,15 @@ namespace BusinessApplicationsProject.ViewModel
         }
         #endregion
         #endregion
+        public ICommand ToonLineUpCommand
+        {
+            get { return new RelayCommand(ToonLineUp,()=>(SelectedStage != null && SelectedDate != null)); }
+        }
+
+        private void ToonLineUp()
+        {
+            Performances = LineUp.GetPerformances(SelectedDate, SelectedStage);
+        }
         public ICommand AddPerfCommand
         {
             get { return new RelayCommand(AddPerf,()=> SelectedBand != null && SelectedStage != null && SelectedDate != null && Check() == true); }
@@ -338,7 +365,9 @@ namespace BusinessApplicationsProject.ViewModel
         private void AddPerf()
         {
             LineUp.AddPerformance(SelectedBand, SelectedDate, SelectedStage, Startmin, Startuur, Eindmin, Einduur);
+            Performances = LineUp.GetPerformances(SelectedDate, SelectedStage);
         }
+        
 
 
 
