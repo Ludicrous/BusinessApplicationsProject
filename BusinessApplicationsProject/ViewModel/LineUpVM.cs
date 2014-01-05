@@ -99,6 +99,14 @@ namespace BusinessApplicationsProject.ViewModel
             get { return _einduur; }
             set { _einduur = value; OnPropertyChanged("Einduur"); }
         }
+        private LineUp _selectedPerf;
+
+        public LineUp SelectedPerf
+        {
+            get { return _selectedPerf; }
+            set { _selectedPerf = value; OnPropertyChanged("SelectedPerf"); }
+        }
+        
         
         
 
@@ -367,7 +375,16 @@ namespace BusinessApplicationsProject.ViewModel
             LineUp.AddPerformance(SelectedBand, SelectedDate, SelectedStage, Startmin, Startuur, Eindmin, Einduur);
             Performances = LineUp.GetPerformances(SelectedDate, SelectedStage);
         }
-        
+        public ICommand DeletePerfCommand
+        {
+            get { return new RelayCommand(DeletePerf, ()=> SelectedPerf!=null);}
+        }
+
+        private void DeletePerf()
+        {
+            LineUp.DeleteDate(SelectedPerf);
+            Performances = LineUp.GetPerformances(SelectedDate, SelectedStage);
+        }
 
 
 

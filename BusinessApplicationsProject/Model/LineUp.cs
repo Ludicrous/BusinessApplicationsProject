@@ -160,5 +160,12 @@ namespace ProjectBussinessApplications.Models
             }
             return lijst;
         }
+
+        internal static void DeleteDate(LineUp SelectedPerf)
+        {
+            DbParameter Id = Database.AddParameter("Value", SelectedPerf.Id);
+            string sql = "Delete from Performances where ID=@Value";
+            Database.ModifyData(sql, Id);
+        }
     }
 }

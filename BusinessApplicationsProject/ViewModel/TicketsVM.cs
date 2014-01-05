@@ -278,6 +278,7 @@ namespace BusinessApplicationsProject.ViewModel
                 Ticket.AddTicket(SelectedBesteld);
                 TicketType.AdjustTicketType(SelectedBesteld);
                 Fill();
+                MessageBox.Show("De bestelling is verzonden");
             }
             
             
@@ -296,6 +297,7 @@ namespace BusinessApplicationsProject.ViewModel
                 TicketType.UpdateTicketType(SelectedBesteld);
                 Ticket.UpdateTicketOrder(SelectedBesteld);
                 Fill();
+                MessageBox.Show("De bestelling werdt gewijzigd");
             }
             
         }
@@ -306,8 +308,10 @@ namespace BusinessApplicationsProject.ViewModel
 
         private void DeleteOrder()
         {
+            
             TicketType.UpdateBestelling(SelectedBesteld);
             Ticket.RemoveTicket(SelectedBesteld);
+            MessageBox.Show("De geselecteerde tickets werden verwijderdt");
             Fill();
         }
         public ICommand PrintTicketCommand
@@ -318,6 +322,7 @@ namespace BusinessApplicationsProject.ViewModel
         private void PrintTicket()
         {
             Ticket.Print(Besteld);
+            MessageBox.Show("De tickets zijn afgeprint");
         }
         #endregion
 

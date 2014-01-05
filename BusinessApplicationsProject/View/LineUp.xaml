@@ -48,9 +48,8 @@
         <ComboBox DisplayMemberPath="Name" ItemsSource="{Binding Stages,UpdateSourceTrigger=PropertyChanged }" SelectedItem="{Binding SelectedStage}"   x:Name="cboStages" HorizontalAlignment="Left" Height="22" Margin="254,10.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="313"/>
         <ComboBox DisplayMemberPath="Name" ItemsSource="{Binding Bands,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBand}"   x:Name="cboBands" HorizontalAlignment="Left" Height="25" Margin="254,10.4,0,0" Grid.Row="4" VerticalAlignment="Top" Width="313"/>
 
-        <Button   x:Name="btnAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="236,9.6,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55" Command="{Binding AddPerfCommand}"/>
-        <Button  x:Name="btnDelete" Content="Verwijderen" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55" Margin="463,9.6,0,0"/>
-        <Button x:Name="btnSync" Content="Bewerken" HorizontalAlignment="Left" Margin="339,9.6,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55"/>
+        <Button   x:Name="btnAdd" Content="Toevoegen" HorizontalAlignment="Left" Margin="368,9.8,0,0" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55" Command="{Binding AddPerfCommand}"/>
+        <Button Command="{Binding DeletePerfCommand}" x:Name="btnDelete" Content="Verwijderen" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Width="70" Height="55" Margin="811,49.8,0,0"/>
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Stage" HorizontalAlignment="Left"  Margin="177,10.2,0,0" Grid.Row="3" VerticalAlignment="Top"  />
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Band" HorizontalAlignment="Left"  Margin="177,13.4,0,0" Grid.Row="4" VerticalAlignment="Top" />
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Starttijd" HorizontalAlignment="Left" Margin="176,9.6,0,0" Grid.Row="5" VerticalAlignment="Top" />
@@ -75,7 +74,7 @@
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Min" HorizontalAlignment="Left" Margin="368,10.6,0,0" Grid.Row="5" VerticalAlignment="Top"/>
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="U" HorizontalAlignment="Left" Margin="297,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
         <Label Style="{StaticResource ResourceKey=IdLabels}" Content="Min" HorizontalAlignment="Left" Margin="368,10,0,0" Grid.Row="6" VerticalAlignment="Top"/>
-        <ListBox ItemsSource="{Binding Performances}" DisplayMemberPath="TotInfo"  HorizontalAlignment="Left" Height="408" Grid.RowSpan="6" VerticalAlignment="Top" Width="412" Margin="921,0.4,0,0" Grid.Row="2"/>
+        <ListBox SelectedItem="{Binding SelectedPerf}" ItemsSource="{Binding Performances}" DisplayMemberPath="TotInfo"  HorizontalAlignment="Left" Height="408" Grid.RowSpan="6" VerticalAlignment="Top" Width="412" Margin="921,0.4,0,0" Grid.Row="2"/>
         <Label   Content="{Binding SelectedDate.Date}" ContentStringFormat="{}{0:dd/MM/yyyy}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1040,34.6,0,0" Grid.Row="1" Grid.RowSpan="2"/>
         <Button Command="{Binding ToonLineUpCommand}" Content="Toon Line Up" HorizontalAlignment="Left" Height="22" Margin="657,9.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="169" />
 
