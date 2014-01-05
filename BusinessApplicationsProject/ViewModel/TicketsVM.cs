@@ -36,6 +36,11 @@ namespace BusinessApplicationsProject.ViewModel
             AddTTEnabled = false;
             ListEnabled = true;
             UpdateEnabled = true;
+            AddEnabled = false;
+            AddNewEnabled = true;
+            ListTEnabled = true;
+            UpdateTEnabled = true;
+            
         }
         private ObservableCollection<Ticket> _besteld;
 
@@ -94,7 +99,37 @@ namespace BusinessApplicationsProject.ViewModel
             get { return _selectedBesteld; }
             set { _selectedBesteld = value; OnPropertyChanged("SelectedBesteld"); }
         }
+        private bool _addEnabled;
 
+        public bool AddEnabled
+        {
+            get { return _addEnabled; }
+            set { _addEnabled = value; OnPropertyChanged("AddEnabled"); }
+        }
+        private bool _addNewEnabled;
+
+        public bool AddNewEnabled
+        {
+            get { return _addNewEnabled; }
+            set { _addNewEnabled = value; OnPropertyChanged("AddNewEnabled"); }
+        }
+        private bool _updateTEnabled;
+
+        public bool UpdateTEnabled
+        {
+            get { return _updateTEnabled; }
+            set { _updateTEnabled = value; OnPropertyChanged("UpdateTEnabled"); }
+        }
+        private bool _listTEnabled;
+
+        public bool ListTEnabled
+        {
+            get { return _listTEnabled; }
+            set { _listTEnabled = value; OnPropertyChanged("ListTEnabled"); }
+        }
+        
+        
+        
 
 
 
@@ -212,6 +247,10 @@ namespace BusinessApplicationsProject.ViewModel
             nieuw.Text = nieuw.Ticketholder + " | " + nieuw.TicketType.Name + " | €" + nieuw.Price.ToString();
             SelectedBesteld = nieuw;
             Besteld.Add(SelectedBesteld);
+            AddEnabled = true;
+            AddNewEnabled = false;
+            ListTEnabled = false;
+            UpdateTEnabled = false;
         }
         public ICommand CancelOrderCommand
         { get { return new RelayCommand(CancelOrder); } }
@@ -219,6 +258,10 @@ namespace BusinessApplicationsProject.ViewModel
         private void CancelOrder()
         {
             Besteld.Remove(SelectedBesteld);
+            AddEnabled = false;
+            AddNewEnabled = true;
+            ListTEnabled = true;
+            UpdateTEnabled = true;
         }
         public ICommand SendOrderCommand
         {
@@ -226,9 +269,17 @@ namespace BusinessApplicationsProject.ViewModel
         }
         private void SendOrder()
         {
-            Ticket.AddTicket(SelectedBesteld);
-            TicketType.AdjustTicketType(SelectedBesteld);
-            Fill();
+            if (SelectedBesteld.Amount > SelectedBesteld.TicketType.AvailableTickets)
+            {
+                MessageBox.Show("Er zijn te weinig tickets beschikbaar voor de bestelling.");
+            }
+            else
+            {
+                Ticket.AddTicket(SelectedBesteld);
+                TicketType.AdjustTicketType(SelectedBesteld);
+                Fill();
+            }
+            
             
         }
         public ICommand UpdateOrderCommand
@@ -238,9 +289,35 @@ namespace BusinessApplicationsProject.ViewModel
 
         private void UpdateOrder()
         {
-            TicketType.UpdateTicketType(SelectedBesteld);
-            Ticket.UpdateTicketOrder(SelectedBesteld);
+            if (SelectedBesteld.Amount > SelectedBesteld.TicketType.AvailableTickets)
+            { MessageBox.Show("Er zijn te weinig tickets beschikbaar voor de bestelling"); }
+            else
+            {
+                TicketType.UpdateTicketType(SelectedBesteld);
+                Ticket.UpdateTicketOrder(SelectedBesteld);
+                Fill();
+            }
+            
+        }
+        public ICommand DeleteOrderCommand
+        {
+            get { return new RelayCommand(DeleteOrder, () => SelectedBesteld != null); }
+        }
+
+        private void DeleteOrder()
+        {
+            TicketType.UpdateBestelling(SelectedBesteld);
+            Ticket.RemoveTicket(SelectedBesteld);
             Fill();
+        }
+        public ICommand PrintTicketCommand
+        {
+            get { return new RelayCommand(PrintTicket, () => Besteld != null); }
+        }
+
+        private void PrintTicket()
+        {
+            Ticket.Print(Besteld);
         }
         #endregion
 

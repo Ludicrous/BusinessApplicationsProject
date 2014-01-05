@@ -136,7 +136,7 @@ namespace ProjectBussinessApplications.Models
             UpdateBestelling(t);
         }
 
-        private static void UpdateBestelling(Ticket t)
+        public static void UpdateBestelling(Ticket t)
         {
             DbParameter Id = Database.AddParameter("Id", t.TicketType.Id);
             DbParameter NewAmount = Database.AddParameter("Amount", t.TicketType.Aangekocht - t.Amount);

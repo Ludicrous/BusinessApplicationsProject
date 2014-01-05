@@ -1,11 +1,15 @@
 ﻿using BusinessApplicationsProject.Model;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace ProjectBussinessApplications.Models
 {
@@ -188,6 +192,42 @@ namespace ProjectBussinessApplications.Models
             DbParameter Price = Database.AddParameter("TotalPrice", (int)Bought.Value * SelectedBesteld.TicketType.Price);
             string sql2 = "Update Tickets Set Ticketholder=@Ticketholder, Email=@Email, TicketType=@TicketType, Amount=@Bought, TotalPrice=@TotalPrice where ID=@TId";
             Database.ModifyData(sql2,Name,Email,Type, Bought,Price, TId);
+        }
+
+        internal static void RemoveTicket(Ticket b)
+        {
+            DbParameter Id = Database.AddParameter("ID", b.Id);
+            string sql = "Delete from Tickets where ID=@ID";
+            Database.ModifyData(sql, Id);
+        }
+
+        internal static void Print(ObservableCollection<Ticket> Besteld)
+        {
+            foreach (Ticket t in Besteld)
+            {
+                string filename = t.Ticketholder + "_" + t.TicketType + "_" +t.Amount+"_"+t.Id +".docx";
+                File.Copy("template.docx", filename, true);
+                WordprocessingDocument newdoc = WordprocessingDocument.Open(filename, true);
+                IDictionary<String, BookmarkStart> bookmarks = new Dictionary<String, BookmarkStart>();
+                foreach (BookmarkStart bms in newdoc.MainDocumentPart.RootElement.Descendants<BookmarkStart>())
+                {
+                    bookmarks[bms.Name] = bms;
+                }
+                bookmarks["Holder"].Parent.InsertAfter<Run>(new Run(new Text(" "+t.Ticketholder)), bookmarks["Holder"]);
+                bookmarks["Price"].Parent.InsertAfter<Run>(new Run(new Text(" " + t.Price.ToString())), bookmarks["Price"]);
+                bookmarks["Amount"].Parent.InsertAfter<Run>(new Run(new Text(" " + t.Amount.ToString())), bookmarks["Amount"]);
+                bookmarks["Type"].Parent.InsertAfter<Run>(new Run(new Text(" " + t.TicketType.Name)), bookmarks["Type"]);
+                Run run = new Run(new Text(t.Ticketholder+t.Id+t.TicketType.Id)); 
+                RunProperties prop = new RunProperties(); 
+                RunFonts font = new RunFonts() { Ascii = "Free 3 of 9 Extended", HighAnsi = "Free 3 of 9 Extended" }; 
+                FontSize size = new FontSize() { Val = "96" }; 
+                
+ 
+                prop.Append(font); 
+                prop.Append(size); 
+                run.PrependChild<RunProperties>(prop);                 bookmarks["Barcode"].Parent.InsertAfter<Run>(run, bookmarks["Barcode"]); 
+                newdoc.Close();
+            }
         }
     }
     }

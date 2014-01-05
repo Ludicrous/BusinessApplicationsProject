@@ -41,31 +41,33 @@
 
 
 
-        <TextBox x:Name="txtKlantNaam" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="61.4,24.6,0,0" Grid.Row="8" TextWrapping="Wrap" Text="{Binding SelectedBesteld.Ticketholder}" VerticalAlignment="Top" Width="205" Grid.ColumnSpan="2"/>
-        <Button Command="{Binding SendOrderCommand}"  x:Name="btnAddG" Content="Verstuur" Grid.Column="2" Margin="10.4,56.2,74.8,0" Grid.Row="9" VerticalAlignment="Top" Height="55" Grid.RowSpan="2"/>
-        <Button x:Name="btnSyncG" Content="Print Ticket" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,10.6,0,0" Grid.Row="8" VerticalAlignment="Top" Width="70" Height="55"/>
-        <Button Command="{Binding DeleteOrderCommand}" x:Name="btnDeleteG" Content="Verwijder" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="9" VerticalAlignment="Top" Width="75" Height="55" Margin="69.2,56.2,0,0" Grid.RowSpan="2"/>
-        <ListBox DisplayMemberPath="Text" ItemsSource="{Binding Besteld}" SelectedItem="{Binding SelectedBesteld}" x:Name="lstKlantBestelling" Grid.ColumnSpan="2" Grid.Column="4" HorizontalAlignment="Left" Height="301" Margin="36.8,22.2,0,0" Grid.Row="6" Grid.RowSpan="5" VerticalAlignment="Top" Width="221"/>
+        <TextBox x:Name="txtKlantNaam" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="61.4,37.6,0,0" Grid.Row="8" TextWrapping="Wrap" Text="{Binding SelectedBesteld.Ticketholder}" VerticalAlignment="Top" Width="205" Grid.ColumnSpan="2"/>
+        <Button  IsEnabled="{Binding AddEnabled}" Command="{Binding SendOrderCommand}"  x:Name="btnAddG" Content="Verstuur" Grid.Column="2" Margin="10.4,56.2,74.8,0" Grid.Row="9" VerticalAlignment="Top" Height="55" Grid.RowSpan="2"/>
+        <Button Command="{Binding PrintTicketCommand}" x:Name="btnSyncG" Content="Print Ticket" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,10.6,0,0" Grid.Row="8" VerticalAlignment="Top" Width="70" Height="55"/>
+        <Button IsEnabled="{Binding UpdateTEnabled}" Command="{Binding DeleteOrderCommand}" x:Name="btnDeleteG" Content="Verwijder" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="9" VerticalAlignment="Top" Width="75" Height="55" Margin="69.2,56.2,0,0" Grid.RowSpan="2"/>
+        <ListBox IsEnabled="{Binding ListTEnabled}" DisplayMemberPath="Text" ItemsSource="{Binding Besteld}" SelectedItem="{Binding SelectedBesteld}" x:Name="lstKlantBestelling" Grid.ColumnSpan="2" Grid.Column="4" HorizontalAlignment="Left" Height="301" Margin="36.8,22.2,0,0" Grid.Row="6" Grid.RowSpan="5" VerticalAlignment="Top" Width="221"/>
         <Button  IsEnabled ="{Binding AddTTEnabled}" Command="{Binding AddTTCommand}"  x:Name="btnAdd" Content="Toevoegen" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,30,0,0" Grid.Row="3" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
         <Button Command="{Binding UpdateTTCommand}" IsEnabled="{Binding UpdateEnabled}" x:Name="btnSync" Content="Bewerken" Grid.Column="6" HorizontalAlignment="Left" Margin="44.4,25.8,0,0" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Grid.RowSpan="2"/>
         <!--<Button  x:Name="btnDel" Content="" Grid.Column="5" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="70" Height="55" Margin="84.36,36.4,0,0" Grid.RowSpan="2"/>-->
-        <Button Command="{Binding UpdateOrderCommand}" x:Name="btnSyncG_Copy1" Content="Bewerken" Grid.Column="2" HorizontalAlignment="Left" Margin="109.4,56.2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="70" Height="55" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button IsEnabled="{Binding UpdateTEnabled}" Command="{Binding UpdateOrderCommand}" x:Name="btnSyncG_Copy1" Content="Bewerken" Grid.Column="2" HorizontalAlignment="Left" Margin="109.4,56.2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="70" Height="55" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <Label Style="{StaticResource IdLabels}" Content="Naam" Grid.Column="4" HorizontalAlignment="Left" Margin="141.8,35.4,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Style="{StaticResource IdLabels}" Content="Prijs" Grid.Column="4" HorizontalAlignment="Left" Margin="141.8,30,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Style="{StaticResource IdLabels}" Content="Totaal Aantal" Grid.Column="4" HorizontalAlignment="Left" Margin="99.8,29.8,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Style="{StaticResource IdLabels}" Content="Beschikbaar" Grid.Column="4" HorizontalAlignment="Left" Margin="99.8,30.4,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Style="{StaticResource IdLabels}" Content="Ticket" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,4.8,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Label Style="{StaticResource IdLabels}" Content="Aantal" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,52.8,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-        <Label Style="{StaticResource IdLabels}" Content="Klant" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,25.6,0,0" Grid.Row="8" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Aantal" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,37.8,0,0" Grid.Row="7" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Style="{StaticResource IdLabels}" Content="Klant" Grid.Column="1" HorizontalAlignment="Left" Margin="145.8,38.6,0,0" Grid.Row="8" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Button IsEnabled="{Binding AddNewTTEnabled}" Command="{Binding AddNewTTCommand}" Content="+" Grid.Column="6" HorizontalAlignment="Left" Height="20" Margin="44.4,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="40"/>
         <Button IsEnabled ="{Binding AddTTEnabled}" Grid.ColumnSpan="2" Content="Annuleer" Grid.Column="6" HorizontalAlignment="Left" Height="20" Margin="102.4,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="92"/>
-        <ComboBox ItemsSource="{Binding TicketTs}" SelectedItem="{Binding SelectedBesteld.TicketType}" SelectedValuePath="Id" 
+        <ComboBox ItemsSource="{Binding TicketTs}" SelectedItem="{Binding SelectedBesteld.TicketType,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Id" 
                 SelectedValue="{Binding SelectedBesteld.TicketType.Id}"
                   DisplayMemberPath="Name" Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="62.4,4.8,0,0" Grid.Row="7" VerticalAlignment="Top" Width="205"/>
-        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="61.4,52.8,0,0" Grid.Row="7" TextWrapping="Wrap" Text="{Binding SelectedBesteld.Amount}" VerticalAlignment="Top" Width="205" Grid.RowSpan="2"/>
+        <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="61.4,37.8,0,0" Grid.Row="7" TextWrapping="Wrap" Text="{Binding SelectedBesteld.Amount}" VerticalAlignment="Top" Width="205"/>
         <Label Style="{StaticResource IdLabels}" Content="E-mail" Grid.Column="1" HorizontalAlignment="Left"  Margin="142.8,10.2,0,0" Grid.Row="9" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <TextBox Grid.ColumnSpan="2" Grid.Column="2" HorizontalAlignment="Left" Height="22" Margin="61.4,10.2,0,0" Grid.Row="9" TextWrapping="Wrap" Text="{Binding SelectedBesteld.TicketholderEmail}" VerticalAlignment="Top" Width="205"/>
-        <Button Command="{Binding AddNewOrderCommand}" Content="+" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="108.8,46.2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="37"/>
-        <Button Command="{Binding CancelOrderCommand}" Content="Annuleer" Grid.Column="1" HorizontalAlignment="Left" Margin="70.8,10,0,0" Grid.Row="10" VerticalAlignment="Top" Width="75"/>
+        <Button IsEnabled="{Binding AddNewEnabled}" Command="{Binding AddNewOrderCommand}" Content="+" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="108.8,46.2,0,0" Grid.Row="9" VerticalAlignment="Top" Width="37"/>
+        <Button IsEnabled="{Binding AddEnabled}" Command="{Binding CancelOrderCommand}" Content="Annuleer" Grid.Column="1" HorizontalAlignment="Left" Margin="70.8,10,0,0" Grid.Row="10" VerticalAlignment="Top" Width="75"/>
+        <Label Style="{StaticResource IdLabels}" Grid.ColumnSpan="2" Content="Beschikbaar" Grid.Column="1" HorizontalAlignment="Left" Margin="108.8,0.6,0,0" Grid.Row="8" VerticalAlignment="Top"/>
+        <TextBox IsEnabled="False" Foreground="Black" x:Name="txtBeschikbaar_Copy" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0.6,43.2,0" Grid.Row="8" TextWrapping="Wrap" Text="{Binding SelectedBesteld.TicketType.AvailableTickets,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="204" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>
